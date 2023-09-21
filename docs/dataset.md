@@ -27,8 +27,8 @@ separated by map.
 ## Crop frames
 
 The learning task just works on the in-game mini-map therefore it's useful to crop the map from the whole image. 
-That has the nice side effect that the input data for the network reduces. That can be done with the program 
-*src/data/crop_data* the cropped maps can than be found in *data/interim/crops*
+That has the nice side effect that the size of the input data for the network reduces. That can be done with the 
+program *src/data/crop_data.py*. The cropped maps can than be found in *data/interim/crops*.
 
 ## Label data
 
