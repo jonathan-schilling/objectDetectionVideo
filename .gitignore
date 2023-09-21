@@ -1,6 +1,13 @@
 ## OWN
 
-/data
+.idea
+/data/*.jpg
+/data/interim/crops
+/data/interim/frames
+/data/processed/*.zip
+/data/raw/*
+!/data/raw/.gitkeep
+
 
 ### Images ###
 *.jpg
@@ -11,8 +18,8 @@
 # Portable Document Format
 *.pdf
 
-### Video ###
-*.mp4
+# Video
+.*mp4
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,python,jupyternotebooks,visualstudiocode,latex,pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,python,jupyternotebooks,visualstudiocode,latex,pycharm
