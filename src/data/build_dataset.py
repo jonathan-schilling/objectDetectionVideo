@@ -15,7 +15,7 @@ from src import constants as c
 import zip_dataset as zip
 
 
-label_file = 'dataset_test'
+label_file = '' # name of the file with point labels without file extension
 
 # pre-checks
 if not label_file:
