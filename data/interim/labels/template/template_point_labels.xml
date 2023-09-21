@@ -1,0 +1,8 @@
+<View>
+  <Image name="image" value="$image" zoom="true" negativeZoom="true" zoomControl="false" crosshair="true"/>
+
+  <KeyPointLabels name="kp" toName="image" maxUsages="5" strokeWidth="15" opacity="0.9">
+    <Label value="attacker" background="#d21414"/>
+    <Label value="defender" background="#14d214"/>
+  </KeyPointLabels>
+</View>

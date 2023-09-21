@@ -1,0 +1,17 @@
+{
+  "categories": [
+    {
+      "id": 0,
+      "name": "attacker"
+    },
+    {
+      "id": 1,
+      "name": "defender"
+    }
+  ],
+  "info": {
+    "year": 2023,
+    "version": "1.0",
+    "contributor": "JS"
+  }
+}
