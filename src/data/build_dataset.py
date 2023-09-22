@@ -14,8 +14,7 @@ from src import paths as p
 from src import constants as c
 import zip_dataset as zip
 
-
-label_file = '' # name of the file with point labels without file extension
+label_file = ''  # name of the file with point labels without file extension
 
 # pre-checks
 if not label_file:
@@ -73,7 +72,7 @@ for img_lbl in parsed_json:
 
 # cleanup
 shutil.copy(p.DATA_BASE_DIR / p.LABEL_DIR / (label_file + p.LABEL_FORMAT),
-                p.DATA_BASE_DIR / p.DATASET_DIR / (label_file + p.LABEL_FORMAT))
+            p.DATA_BASE_DIR / p.DATASET_DIR / (label_file + p.LABEL_FORMAT))
 os.remove(p.DATA_BASE_DIR / p.LABEL_DIR / (label_file + p.LABEL_FORMAT))
 if os.path.exists(p.DATA_BASE_DIR / p.LABEL_DIR / 'tmp'):
     shutil.rmtree(p.DATA_BASE_DIR / p.LABEL_DIR / 'tmp')
