@@ -7,8 +7,7 @@ by Jonathan Schilling
 import os
 
 from src import paths as p
-import video_tools as vtools
-
+from src.data.utils_data import video_tools as vtools
 
 if not os.path.exists(p.DATA_BASE_DIR / p.FRAME_DIR):
     os.makedirs(p.DATA_BASE_DIR / p.FRAME_DIR)

@@ -12,7 +12,7 @@ import zipfile
 
 from src import paths as p
 from src import constants as c
-import zip_dataset as zip
+from src.data.utils_data import zip_dataset as zip_ds
 
 label_file = ''  # name of the file with point labels without file extension
 
@@ -68,7 +68,7 @@ for img_lbl in parsed_json:
 
     path_zip = p.DATA_BASE_DIR / p.DATASET_DIR / (label_file + '.zip')
     with (zipfile.ZipFile(path_zip, 'w', zipfile.ZIP_DEFLATED) as zipf):
-        zip.zip_dataset(p.DATA_BASE_DIR / p.LABEL_DIR / 'tmp', zipf)
+        zip_ds.zip_dataset(p.DATA_BASE_DIR / p.LABEL_DIR / 'tmp', zipf)
 
 # cleanup
 shutil.copy(p.DATA_BASE_DIR / p.LABEL_DIR / (label_file + p.LABEL_FORMAT),
