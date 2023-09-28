@@ -76,7 +76,8 @@ def create_split(label_file, seed, train_p=0.8, val_p=0.1, test_p=0.1):
 
     ds_base_path = p.DATA_BASE_DIR / p.DATASET_DIR / f'ds_{label_file}' / label_file
 
-    imgs = [i for i in os.listdir(ds_base_path / 'images') if i.endswith(p.IMAGE_FORMAT)]
+    imgs_files = [str(i) for i in os.listdir(ds_base_path / 'images') if i.endswith(p.IMAGE_FORMAT)]
+    imgs = [((ds_base_path / 'images').as_posix() + '/') + sub for sub in imgs_files]
     random.Random(seed).shuffle(imgs)
 
     num_train_imgs = math.ceil(len(imgs)*train_p)
