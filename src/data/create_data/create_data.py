@@ -1,5 +1,5 @@
 """
-Create raw frames from videos
+Create raw frames from videos.
 
 by Jonathan Schilling
 """
@@ -7,7 +7,8 @@ by Jonathan Schilling
 import os
 
 from src import paths as p
-from src.data.utils_data import video_tools as vtools
+from src.data.utils_data import video2frames as vtools
+
 
 if not os.path.exists(p.DATA_BASE_DIR / p.FRAME_DIR):
     os.makedirs(p.DATA_BASE_DIR / p.FRAME_DIR)
@@ -24,7 +25,7 @@ for m in p.MAPS:
 
 log_file.write('\n')
 
-# create data
+# create data from videos in DATA_BASE_DIR/VIDEO_DIR/<map>
 for m in p.MAPS:
     path = p.DATA_BASE_DIR / p.VIDEO_DIR / m
     files_mp4 = [i[:-4] for i in os.listdir(path) if i.endswith(p.VIDEO_FORMAT)]
@@ -41,3 +42,5 @@ for m in p.MAPS:
     print(f"Map: {m}, totalSavedFrames: {total_saved_frames}")
     log_file.write(f'Map: {m}, totalSavedFrames: {total_saved_frames}\n')
     log_file.write('\n')
+
+log_file.close()
