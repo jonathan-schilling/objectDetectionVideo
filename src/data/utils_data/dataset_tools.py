@@ -119,6 +119,9 @@ def create_ds_yaml(label_file):
     val: data_splits/validation.txt
     test: data_splits/test.txt
     
+    # Number of classes
+    nc: 2
+    
     # Classes
     names:
       0: attacker
