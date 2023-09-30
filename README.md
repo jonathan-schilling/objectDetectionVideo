@@ -9,7 +9,7 @@ Pattern Recognition Project at Ulm University
 │
 ├── data
 │   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
+│   ├── processed      <- The final data sets.
 │   └── raw            <- The original, immutable data dump.
 │
 ├── docs
@@ -26,8 +26,6 @@ Pattern Recognition Project at Ulm University
 ├── src                <- Source code for use in this project.
     │
     ├── data           <- Scripts to download or generate data
-    │
-    ├── features       <- Scripts to turn raw data into features for modeling
     │
     ├── models         <- Scripts to train models and then use trained models to make predictions
     │
