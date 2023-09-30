@@ -56,7 +56,7 @@ for img_lbl in parsed_json:
 
 
 # Create train/validation/test split
-ds_tools.create_split(label_file, SEED, train_p=0.8, val_p=0.15, test_p=0.5)
+ds_tools.create_split(label_file, SEED)
 
 # Create dataset description
 ds_tools.create_ds_yaml(label_file)
