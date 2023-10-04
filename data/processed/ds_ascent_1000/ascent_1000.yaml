@@ -1,0 +1,17 @@
+
+# ASCENT_1000 dataset
+
+path: C:/Users/Jonathan/Documents/Development/git/gitlab/projectpr/data/processed/ds_ascent_1000/ascent_1000
+
+# Data split
+train: data_splits/train.txt
+val: data_splits/validation.txt
+test: data_splits/test.txt
+
+# Number of classes
+nc: 2
+
+# Classes
+names:
+  0: attacker
+  1: defender

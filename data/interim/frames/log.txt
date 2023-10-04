@@ -1,0 +1,69 @@
+Created directory: C:\Users\Jonathan\Documents\Development\git\gitlab\projectpr\data\interim\frames\ascent
+Created directory: C:\Users\Jonathan\Documents\Development\git\gitlab\projectpr\data\interim\frames\haven
+Created directory: C:\Users\Jonathan\Documents\Development\git\gitlab\projectpr\data\interim\frames\split
+
+Map: ascent, Video: 01, #Frames: 5338, FPS: 59, #savedFrames: 97
+Map: ascent, Video: 02, #Frames: 4560, FPS: 59, #savedFrames: 85
+Map: ascent, Video: 03, #Frames: 8874, FPS: 59, #savedFrames: 151
+Map: ascent, Video: 04, #Frames: 6418, FPS: 59, #savedFrames: 115
+Map: ascent, Video: 05, #Frames: 2041, FPS: 59, #savedFrames: 38
+Map: ascent, Video: 06, #Frames: 6119, FPS: 59, #savedFrames: 103
+Map: ascent, Video: 07, #Frames: 6476, FPS: 59, #savedFrames: 110
+Map: ascent, Video: 08, #Frames: 6058, FPS: 59, #savedFrames: 111
+Map: ascent, Video: 09, #Frames: 7797, FPS: 59, #savedFrames: 137
+Map: ascent, Video: 10, #Frames: 7317, FPS: 59, #savedFrames: 126
+Map: ascent, Video: 11, #Frames: 3480, FPS: 59, #savedFrames: 63
+Map: ascent, Video: 12, #Frames: 3299, FPS: 59, #savedFrames: 60
+Map: ascent, Video: 13, #Frames: 8454, FPS: 59, #savedFrames: 151
+Map: ascent, Video: 14, #Frames: 7976, FPS: 59, #savedFrames: 143
+Map: ascent, Video: 15, #Frames: 8514, FPS: 59, #savedFrames: 144
+Map: ascent, Video: 16, #Frames: 4979, FPS: 59, #savedFrames: 92
+Map: ascent, Video: 17, #Frames: 3840, FPS: 59, #savedFrames: 65
+Map: ascent, Video: 18, #Frames: 6117, FPS: 59, #savedFrames: 109
+Map: ascent, Video: 19, #Frames: 6837, FPS: 59, #savedFrames: 124
+Map: ascent, Video: 20, #Frames: 6777, FPS: 59, #savedFrames: 118
+Map: ascent, Video: 21, #Frames: 8037, FPS: 59, #savedFrames: 141
+Map: ascent, Video: 22, #Frames: 6118, FPS: 59, #savedFrames: 105
+Map: ascent, totalSavedFrames: 2388
+
+Map: haven, Video: 01, #Frames: 7135, FPS: 59, #savedFrames: 120
+Map: haven, Video: 02, #Frames: 7675, FPS: 59, #savedFrames: 136
+Map: haven, Video: 03, #Frames: 6238, FPS: 59, #savedFrames: 109
+Map: haven, Video: 04, #Frames: 2640, FPS: 59, #savedFrames: 52
+Map: haven, Video: 05, #Frames: 5819, FPS: 59, #savedFrames: 106
+Map: haven, Video: 06, #Frames: 7917, FPS: 59, #savedFrames: 136
+Map: haven, Video: 07, #Frames: 7078, FPS: 59, #savedFrames: 121
+Map: haven, Video: 08, #Frames: 4619, FPS: 59, #savedFrames: 80
+Map: haven, Video: 09, #Frames: 2759, FPS: 59, #savedFrames: 50
+Map: haven, Video: 10, #Frames: 4018, FPS: 59, #savedFrames: 76
+Map: haven, Video: 11, #Frames: 4680, FPS: 59, #savedFrames: 82
+Map: haven, Video: 12, #Frames: 6538, FPS: 59, #savedFrames: 113
+Map: haven, Video: 13, #Frames: 4619, FPS: 59, #savedFrames: 78
+Map: haven, Video: 14, #Frames: 1982, FPS: 59, #savedFrames: 34
+Map: haven, Video: 15, #Frames: 8334, FPS: 59, #savedFrames: 145
+Map: haven, Video: 16, #Frames: 6478, FPS: 59, #savedFrames: 112
+Map: haven, Video: 17, #Frames: 7554, FPS: 59, #savedFrames: 127
+Map: haven, Video: 18, #Frames: 4438, FPS: 59, #savedFrames: 80
+Map: haven, Video: 19, #Frames: 6656, FPS: 59, #savedFrames: 112
+Map: haven, Video: 20, #Frames: 2462, FPS: 59, #savedFrames: 44
+Map: haven, totalSavedFrames: 1913
+
+Map: split, Video: 01, #Frames: 4019, FPS: 59, #savedFrames: 68
+Map: split, Video: 02, #Frames: 5099, FPS: 59, #savedFrames: 94
+Map: split, Video: 03, #Frames: 7796, FPS: 59, #savedFrames: 134
+Map: split, Video: 04, #Frames: 6057, FPS: 59, #savedFrames: 105
+Map: split, Video: 05, #Frames: 5939, FPS: 59, #savedFrames: 105
+Map: split, Video: 06, #Frames: 6538, FPS: 59, #savedFrames: 112
+Map: split, Video: 07, #Frames: 4318, FPS: 59, #savedFrames: 77
+Map: split, Video: 08, #Frames: 6538, FPS: 59, #savedFrames: 114
+Map: split, Video: 09, #Frames: 6597, FPS: 59, #savedFrames: 111
+Map: split, Video: 10, #Frames: 6176, FPS: 59, #savedFrames: 107
+Map: split, Video: 11, #Frames: 5217, FPS: 59, #savedFrames: 94
+Map: split, Video: 12, #Frames: 5098, FPS: 59, #savedFrames: 92
+Map: split, Video: 13, #Frames: 5878, FPS: 59, #savedFrames: 105
+Map: split, Video: 14, #Frames: 5577, FPS: 59, #savedFrames: 100
+Map: split, Video: 15, #Frames: 4018, FPS: 59, #savedFrames: 73
+Map: split, Video: 16, #Frames: 3958, FPS: 59, #savedFrames: 68
+Map: split, Video: 17, #Frames: 5999, FPS: 59, #savedFrames: 110
+Map: split, totalSavedFrames: 1669
+
