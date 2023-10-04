@@ -8,27 +8,21 @@ Pattern Recognition Project at Ulm University
 ├── README.md
 │
 ├── data
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final data sets.
-│   └── raw            <- The original, immutable data dump.
+│   ├── interim        <- Intermediate data that has been transformed
+│   ├── processed      <- Final datasets & data for prediction tasks
+│   └── raw            <- Original, immutable data 
 │
 ├── docs
 │
-│── models             <- Trained and serialized models, model predictions, or model summaries.
+│── models             <- Model data for/from training/validation/testing
 │
-├── notebooks          <- Jupyter notebooks. 
+├── notebooks          <- Jupyter notebooks 
 │
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting.
+├── report             <- Latex project report
 │
-├── scripts            <- Scripts. 
+├── scripts            <- Scripts 
 │
-├── src                <- Source code for use in this project.
-    │
-    ├── data           <- Scripts to download or generate data
-    │
-    ├── models         <- Scripts to train models and then use trained models to make predictions
-    │
-    └── visualization  <- Scripts to create exploratory and results oriented visualizations
+└── src                <- Source code
+    └── data           <- Scripts generate datasets
 ```
 
