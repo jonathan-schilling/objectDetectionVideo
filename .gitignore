@@ -1,17 +1,5 @@
 ## OWN
 
-.idea
-/data/*.jpg
-/data/interim/crops
-/data/interim/frames
-/data/interim/labels/*.json
-!/data/interim/labels/assets/notes.json
-/data/processed/*/*
-!/data/processed/*/*.json
-/data/raw/*
-!/data/raw/.gitkeep
-
-
 ### Images ###
 *.jpg
 *.jpeg
@@ -23,6 +11,33 @@
 
 # Video
 .*mp4
+
+#Pytorch
+*.pt
+
+# Others
+.idea
+
+/data/interim/crops/ascent
+/data/interim/crops/haven
+/data/interim/crops/split
+/data/interim/frames/ascent
+/data/interim/frames/haven
+/data/interim/frames/split
+!/data/interim/heatmaps/assets/*
+/data/interim/labels/*.json
+!/data/interim/labels/assets/notes.json
+
+/data/processed/*/*
+!/data/processed/detect/.gitkeep
+!/data/processed/*/*.json
+!/data/processed/*/*.yaml
+
+/data/raw/*.mp4
+/data/raw/*/*
+!/data/raw/videos_raw/.gitkeep
+
+/models/experiments/*/*
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,python,jupyternotebooks,visualstudiocode,latex,pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,python,jupyternotebooks,visualstudiocode,latex,pycharm
