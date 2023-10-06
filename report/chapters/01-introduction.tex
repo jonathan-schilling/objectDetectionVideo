@@ -1,0 +1,80 @@
+\chapter{Introduction}\label{chpt:introduction}
+\glsresetall
+
+Esports is a growing market for years. The events become more professional, prize money is rising 
+and even broadcasters like ProSieben MAXX show such events on television 
+already~\cite{kovacevic}. In light of this the performance pressure of teams gets bigger and 
+preparation effort increases. But what exactly is esports? The German Games Industry Association 
+defines the term esports as a competition between two or more people playing video games 
+according to fixed rules~\cite{kovacevic}. Those people mostly organize in professional teams from 
+all around the world. Common game genre for esports events are real-time strategy games, 
+multiplayer online battle arena games, tactical shooters and sport simulations. For popular games 
+like League of Legends (Riot Games), Counter Strike: Global Offensive (Valve) or FIFA (Electronic 
+Arts)  various leagues and tournaments were founded and the players have to show their best 
+performances to keep their place in the team as professional gamer. During the corona pandemic 
+online content streaming on platforms like Twitch or Mixer became very popular and also the 
+popularity of esports was boosted, which often is streamed on such platforms~\cite{kovacevic}. In 
+that time a new tactic shooter was published: Valorant from Riot Games~\cite{riotgames-valorant}. It 
+became a big hype and therefore the player base grew very fast, so that Riot Games decided to start 
+a tournament the "Valorant Champions Tour" also called VCT~\cite{riotgames-vct}. A concept and 
+first implementation for a tool that can help Valorant teams and players to improve their performance 
+in the highly competitive VCT is introduced in this project report.
+
+\section{Problem Definition}\label{sec:intro:problem}
+
+After that short introduction to esports in general, the following section defines the problem that is 
+addressed within that project. The initial idea of that project came from a Youtube 
+video~\cite{river2021} in that someone tried to implement an artificial intelligent agent that plays the 
+video game Valorant autonomously.
+Such agents in general are a big problem in the gaming scene because some players try to gain an 
+unfair advantage from 3rd party programs that are used to display more information for the players 
+than intended or helps them to react faster and more precise on occurring events than it is possible 
+for a human being. Due to that problem it is prohibited in the terms and conditions of online 
+multiplayer games to use any type of additional programs to play the game and there are anti-cheat 
+mechanisms running on the same computer as the game, searching for suspect programs that try to 
+manipulate the outcome of a match. If a cheat program is detected the player becomes banned from 
+the game. Because of that fact it isn't that easy to implement and test an artificial agent that plays 
+the game.
+
+Due to cheating concerns the video and its content could be condemned but the creator just had 
+educational purposes, didn't harmed any player and in the end the implemented agent would not be 
+good enough to compete with average Valorant players. In the video the creator found a way that he 
+could implement an agent that cannot be detected by the anti-cheat mechanisms: he placed the 
+agent on a separate computer than the game. Additionally in difference to programs that try to 
+cheat, the artificial agent only became the ability to interact with the game client as every human 
+player. Input was the content of the in-game screen, captured completely legal and output of the 
+agent were mouse and keyboard commands, that were transmitted to the computer with the 
+Valorant client running. With that setup he successfully created a system that was able to play the 
+game on a very basic level. Due to the reason that he showed a way with that it might be possible to 
+build a cheat-client that cannot be detected by the anti-cheat of Valorant he decided not to share 
+his source code~\cite{river2021}.
+
+So the first idea of the project was to recreate a similar agent, but that would have been too much 
+for a single project. Therefore the next idea was to build an application that is able to 
+analyze Valorant gameplay and helps to evaluate already played games for training purposes, as it is 
+common in most ordinary sport disciplines. The task of that application is to generate alternative 
+representations of game data. Normally data from matches is available as recorded video from 
+player respectively observer view or as raw data saved in databases from the game publisher. A 
+transformation of those data can result in a better overview and understanding of the whole match 
+and what happens there. In a first step those generated transformations can be analyzed by a trainer 
+or the players themselves. Later it would be possible to use this data again as input for other pattern 
+recognition algorithms that try to find problems in rounds that were lost and flaws in the tactics of 
+opponents or even to invent new tactics. Further it could be possible to train an artificial agent with 
+such transformations as input and try to reach a new level of tactical understanding.
+
+As already mentioned one possibility to get game data are databases from the game publisher. 
+There is also an \gls{acr-api} that would provide all data from matches but it is impossible to get an 
+\gls{acr-api}-Key if it is not used for an already publicly running and from Riot Games legitimated 
+application. For this reason the raw data will be gameplay videos that become transformed into a 
+simpler form of presentation.
+
+Summarized the task of that project is to use a pattern recognition algorithm to transform a 
+gameplay video of the computer game Valorant into a more compact and easier to understand data 
+representation. That includes acquisition and pre-processing of data; selection, training and 
+evaluation of a neural network; choosing a trained version for inference and preparation of the 
+output data for presentation.
+
+\section{Valorant}\label{sec:intro:valorant}
+
+
+\section{Related Work}\label{sec:intro:relatedWork}
