@@ -12,8 +12,11 @@
 # Video
 .*mp4
 
-#Pytorch
+# Pytorch
 *.pt
+
+# Latex
+*.ist
 
 # Others
 .idea
@@ -38,6 +41,8 @@
 !/data/raw/videos_raw/.gitkeep
 
 /models/experiments/*/*
+
+!/report/images/*
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,python,jupyternotebooks,visualstudiocode,latex,pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,python,jupyternotebooks,visualstudiocode,latex,pycharm
