@@ -1,43 +1,43 @@
 \chapter{Introduction}\label{chpt:introduction}
 \glsresetall
 
-Esports is a growing market for years. The events become more professional, prize money is rising 
-and even broadcasters like ProSieben MAXX show such events on television 
-already~\cite{kovacevic}. In light of this the performance pressure of teams gets bigger and 
-preparation effort increases. But what exactly is esports? The German Games Industry Association 
-defines the term esports as a competition between two or more people playing video games 
-according to fixed rules~\cite{kovacevic}. Those people mostly organize in professional teams from 
-all around the world. Common game genre for esports events are real-time strategy games, 
+E-Sports is a growing market for years. The events become more professional, prize money is rising 
+and even broadcasters like ProSieben MAXX already show such events on 
+television~\cite{kovacevic}. In light of this, the performance pressure of teams get bigger and 
+preparation effort increases. But what exactly is e-sports? The German Games Industry Association 
+defines the term e-sports as a competition between two or more people playing video games 
+according to fixed rules~\cite{kovacevic}. Those people are mostly organized in professional teams 
+from all around the world. Common game genre for e-sports events are real-time strategy games, 
 multiplayer online battle arena games, tactical shooters and sport simulations. For popular games 
 like League of Legends (Riot Games), Counter Strike: Global Offensive (Valve) or FIFA (Electronic 
 Arts)  various leagues and tournaments were founded and the players have to show their best 
 performances to keep their place in the team as professional gamer. During the corona pandemic 
 online content streaming on platforms like Twitch or Mixer became very popular and also the 
-popularity of esports was boosted, which often is streamed on such platforms~\cite{kovacevic}. In 
+popularity of e-sports was boosted, which often is streamed on such platforms~\cite{kovacevic}. In 
 that time a new tactic shooter was published: Valorant from Riot Games~\cite{riotgames-valorant}. It 
 became a big hype and therefore the player base grew very fast, so that Riot Games decided to start 
 a tournament the "Valorant Champions Tour" also called VCT~\cite{riotgames-vct}. A concept and 
 first implementation for a tool that can help Valorant teams and players to improve their performance 
-in the highly competitive VCT is introduced in this project report.
+in e.g. the highly competitive VCT is introduced in this project report.
 
 \section{Problem Definition}\label{sec:intro:problem}
 
-After that short introduction to esports in general, the following section defines the problem that is 
+After that short introduction to e-sports in general, the following section defines the problem that is 
 addressed within that project. The initial idea of that project came from a Youtube 
 video~\cite{river2021} in that someone tried to implement an artificial intelligent agent that plays the 
 video game Valorant autonomously.
 Such agents in general are a big problem in the gaming scene because some players try to gain an 
-unfair advantage from 3rd party programs that are used to display more information for the players 
-than intended or helps them to react faster and more precise on occurring events than it is possible 
-for a human being. Due to that problem it is prohibited in the terms and conditions of online 
-multiplayer games to use any type of additional programs to play the game and there are anti-cheat 
-mechanisms running on the same computer as the game, searching for suspect programs that try to 
-manipulate the outcome of a match. If a cheat program is detected the player becomes banned from 
-the game. Because of that fact it isn't that easy to implement and test an artificial agent that plays 
-the game.
+unfair advantage from 3rd party programs. Those programs are used to display more information for 
+the players than intended or helps them to react faster and more precise on occurring events than it 
+is possible for a human being. Due to that problem it is prohibited in the terms and conditions of 
+online multiplayer games to use any type of additional programs to play the game. Furthermore there 
+are anti-cheat mechanisms running on the same computer as the game, searching for suspect 
+programs that try to manipulate the outcome of a match. If a cheat program is detected the player 
+becomes banned from the game. Because of that fact it is not that easy to implement and test an 
+artificial agent that plays the game.
 
 Due to cheating concerns the video and its content could be condemned but the creator just had 
-educational purposes, didn't harmed any player and in the end the implemented agent would not be 
+educational purposes, did not harmed any player and in the end the implemented agent would not be 
 good enough to compete with average Valorant players. In the video the creator found a way that he 
 could implement an agent that cannot be detected by the anti-cheat mechanisms: he placed the 
 agent on a separate computer than the game. Additionally in difference to programs that try to 
@@ -45,7 +45,7 @@ cheat, the artificial agent only became the ability to interact with the game cl
 player. Input was the content of the in-game screen, captured completely legal and output of the 
 agent were mouse and keyboard commands, that were transmitted to the computer with the 
 Valorant client running. With that setup he successfully created a system that was able to play the 
-game on a very basic level. Due to the reason that he showed a way with that it might be possible to 
+game on a very basic level. Due to the reason that he showed a way that could make it possible to 
 build a cheat-client that cannot be detected by the anti-cheat of Valorant he decided not to share 
 his source code~\cite{river2021}.
 
@@ -84,16 +84,48 @@ fictitious towns. In the context of this project the maps "Ascent", "Haven" and 
 but in total there are currently ten maps. Each player of a team chooses at the start of the game one 
 out of 22 agents whereby every agent only can be chosen once per team. Those agents are 
 categorized by four character classes: Duelist, Initiator, Sentinels and Controllers. The tactical 
-meaning of that classes isn't important for this project. At the start of the match it is decided 
+meaning of that classes is not important for this project. At the start of the match it is decided 
 randomly which team begins on attacker side and which starts as defender. After twelve rounds the 
 sides are switching. The goal of the attacking team is to place a bomb (also called Spike) on certain 
 areas on the map or to kill the defending team. For that the attackers have 100 seconds, otherwise 
 the defenders win the round. Is the Spike planted a countdown of 45 seconds starts until detonation. 
-In that time the defending team has the possibility to defuse the bomb and win the round. When the 
-Spike explodes after the 45 seconds the attackers are winning the round. The last option for the 
-defenders to win a round is to kill the whole attacking team and avoiding that the bomb explodes. To 
-win the rounds each player can choose from a variety of weapons like in all shooter games. One 
-special feature of Valorant is that every agent has a distinct set of abilities. Those abilities bring 
-additional options to make an impact on the round.
+In that time the defending team has the possibility to defuse the bomb and win the round for 
+themselves. When the Spike explodes after the 45 seconds the attackers are winning the round. The 
+last option for the defenders to win a round is to kill the whole attacking team and avoid that the 
+bomb explodes if it was planted. To win a round each player can choose from a variety of 
+weapons like in all shooter games. One special feature of Valorant is that every agent has a distinct 
+set of abilities. Those abilities bring additional options to make an impact on the 
+round~\cite{riotgames-valorant, spike2023, unrated2023}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.95\linewidth]{images/02-ingame-minimap}
+	\caption[In-game screenshot of Valorant]{In-game screenshot of Valorant with a marker on the 
+	minimap.}
+	\label{fig:intro:ingame}
+\end{figure}
+
+\autoref{fig:intro:ingame} shows an in-game screen of Valorant from players perspective. Most 
+important for this project is the blue marked part in the upper left corner. This is the minimap that 
+gives an overview of the map\footnote{In that case it is the map "Ascent".} and where teammates or 
+agent abilities are placed. In image~\ref{fig:intro:minimap} a zoomed version of this minimap can be 
+seen. The gray area is an illustration of the map with the most distinctive points. Normally it is used 
+for orientation. Furthermore on the minimap the teammates can be found, two of them are marked 
+with a blue square. All five agents in that image are one team and on defender side. The side can be 
+identified by the color "green" that surrounds the characters\footnote{Attackers would be pictured 
+in red.}.  Except for the agent on the far left: that color is yellow, but that means that this is the agent 
+whose perspective the screenshot is from, but he is also a defender. The item marked in yellow is an 
+ability of an agent from the defender team. The red point marked with pink is an ability from an 
+attacker/enemy. The two areas named "A" and "B" are the plant spots where the bomb can be 
+placed as mentioned before.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.86\linewidth]{images/04-minimap-marker}
+	\caption[Valorant minimap]{Valorant minimap with teammates (blue), team abilities (yellow) and 
+	enemy ability (pink).}
+	\label{fig:intro:minimap}
+\end{figure}
+
 
 \section{Related Work}\label{sec:intro:relatedWork}
