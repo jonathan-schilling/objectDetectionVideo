@@ -128,3 +128,48 @@ be placed as mentioned before.
 
 
 \section{Related Work}\label{sec:intro:relatedWork}
+
+In the following section some related work of this project is outlined.
+
+\subsection[Video: Valorant AI]{Valorant AI}\label{subsec:intro:video}
+
+First of all it is necessary to mention the Youtube video "I tried to make a Valorant AI using computer 
+vision"~\cite{river2021} again, because it has provided the idea for this project and comes close to 
+the work done within the scope of that project. What was done in the video is already described in 
+\autoref{sec:intro:problem}. The video not only gave the idea but also shows some realization 
+possibilities which have been used and adapted for this project. In particular how data could be 
+created and that it uses YOLOv5~\cite{jocher2020} as learning framework.
+
+\subsection[Neural Network Framework: You Only Look Once]{You Only Look 
+Once}\label{subsec:intro:yolo}
+
+As mentioned before YOLOv5~\cite{jocher2020} was used to implement an artificial intelligent agent 
+that is able to play the video game Valorant by itself. This is one major version of the neural network 
+framework "You Only Look Once", in short YOLO. That framework is introduced in the subsequent 
+part.
+
+YOLO was initially published in 2016 by \citeauthor{redmon2016}~\cite{redmon2016}. Back then it 
+was the first real-time end-to-end approach for object detection. In difference to other approaches it 
+introduced a way to complete the detection task within a single pass of the network. This 
+characteristic makes it possible to perform object detection as real-time application and is the 
+reason why the framework is called YOLO\footnote{You Only Look Once}~\cite{terven2023}. 
+Alternative frameworks like R-CNN~\cite{girshick1994} from \citeyear{girshick1994} or Fast 
+R-CNN~\cite{girshick2015} from \citeyear{girshick2015} apply a two-stage object detection where 
+regression is used to find object coordinates and classification to determine the probabilities. The 
+YOLO framework uses regression for both tasks~\cite{aydin2023, terven2023}.
+
+The development of YOLO continues to this day and miscellaneous authors have introduced 
+enhanced versions of the framework. The versions YOLOv5~\cite{jocher2020} and 
+YOLOv8~\cite{jocher2023} were developed by Ultralytics~\cite{ultralytics} with their founder and 
+CEO Glen Jocher. While version eight is completely new from January this year, YOLOv5 was 
+published in 2020 but the latest release version 7.0 is also from 2023. Both frameworks are open 
+source and actively maintained by Ultralytics and other contributors~\cite{terven2023}.
+
+Despite various authors have developed the different versions of YOLO the fundamental concept of 
+creating a fast and accurate framework was kept the same over all years. Therefore YOLO 
+established itself as an easy to use, train and deploy neural network that is the most frequently used 
+and reliable object detection algorithm~\cite{aydin2023, terven2023}. Because the network has very 
+good real-time object detection abilities it is used for autonomous vehicles, surveillance or sports 
+analysis but it also has possible uses in agriculture or in the medical 
+field~\cite{terven2023, zheng2022}. Finally it is worth mentioning, that there is also a mobile version 
+of YOLO available~\cite{terven2023}.
