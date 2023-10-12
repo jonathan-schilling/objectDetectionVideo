@@ -104,7 +104,7 @@ options to make an impact on the round~\cite{riotgames-valorant, spike2023, unra
 	\label{fig:intro:ingame}
 \end{figure}
 
-\autoref{fig:intro:ingame} shows an in-game screen of Valorant from players perspective. Most 
+Figure~\ref{fig:intro:ingame} shows an in-game screen of Valorant from players perspective. Most 
 important for this project is the blue marked part in the upper left corner. This is the minimap that 
 gives an overview of the map\footnote{In that case it is the map "Ascent".} and where teammates or 
 agent abilities are placed. In image~\ref{fig:intro:minimap} a zoomed version of this minimap can be 
@@ -129,14 +129,14 @@ be placed as mentioned before.
 
 \section{Related Work}\label{sec:intro:relatedWork}
 
-In the following section some related work of this project is outlined.
+In the following section related work of this project and basic knowledge is outlined.
 
 \subsection[Video: Valorant AI]{Valorant AI}\label{subsec:intro:video}
 
 First of all it is necessary to mention the Youtube video "I tried to make a Valorant AI using computer 
 vision"~\cite{river2021} again, because it has provided the idea for this project and comes close to 
 the work done within the scope of that project. What was done in the video is already described in 
-\autoref{sec:intro:problem}. The video not only gave the idea but also shows some realization 
+section~\ref{sec:intro:problem}. The video not only gave the idea but also shows some realization 
 possibilities which have been used and adapted for this project. In particular how data could be 
 created and that it uses YOLOv5~\cite{jocher2020} as learning framework.
 
@@ -160,16 +160,144 @@ YOLO framework uses regression for both tasks~\cite{aydin2023, terven2023}.
 
 The development of YOLO continues to this day and miscellaneous authors have introduced 
 enhanced versions of the framework. The versions YOLOv5~\cite{jocher2020} and 
-YOLOv8~\cite{jocher2023} were developed by Ultralytics~\cite{ultralytics} with their founder and 
-CEO Glen Jocher. While version eight is completely new from January this year, YOLOv5 was 
-published in 2020 but the latest release version 7.0 is also from 2023. Both frameworks are open 
-source and actively maintained by Ultralytics and other contributors~\cite{terven2023}.
+YOLOv8~\cite{jocher2023}, for example, were developed by Ultralytics~\cite{ultralytics} with their 
+founder and CEO Glen Jocher. While version eight is completely new from January this year,  
+YOLOv5 was published in 2020 but the latest release version 7.0 is also from 2023. Both 
+frameworks are open source and actively maintained by Ultralytics and other 
+contributors~\cite{terven2023}.
 
 Despite various authors have developed the different versions of YOLO the fundamental concept of 
 creating a fast and accurate framework was kept the same over all years. Therefore YOLO 
-established itself as an easy to use, train and deploy neural network that is the most frequently used 
-and reliable object detection algorithm~\cite{aydin2023, terven2023}. Because the network has very 
-good real-time object detection abilities it is used for autonomous vehicles, surveillance or sports 
-analysis but it also has possible uses in agriculture or in the medical 
-field~\cite{terven2023, zheng2022}. Finally it is worth mentioning, that there is also a mobile version 
-of YOLO available~\cite{terven2023}.
+established itself as an easy to use, train and deploy neural network and is the most frequently used 
+object detection algorithm~\cite{aydin2023, terven2023}. Because of the very good real-time object 
+detection abilities the network is employed for autonomous vehicles, surveillance or sports 
+analysis but it also has possible uses in agriculture or in the medical field~\cite{terven2023, 
+zheng2022}. Finally it is worth mentioning, that there is also a mobile version of YOLO 
+available~\cite{terven2023}.
+
+\subsection{Metrics}\label{subsec:intro:metrics}
+
+Consecutively metrics for evaluation of neural networks are introduced.
+
+\subsubsection*{Precision and Recall}
+
+Precision and Recall are two metrics that evaluate the correct predictions of neural networks. While 
+precision measures the accuracy of the positive predictions, recall quantifies the amount of correctly 
+determined positive labels. They can be calculated as follows: 
+
+\begin{equation}
+	\label{eq:intro:precision}
+	\text{Precision} = \frac{TP}{TP + FP}
+\end{equation}
+
+\begin{equation}
+	\label{eq:intro:recall}
+	\text{Recall} = \frac{TP}{TP + FN}
+\end{equation}
+
+Thereby true positive ($TP$) refers to the number of positive predictions that are classified 
+correctly. False positive ($FP$) predictions are incorrectly identified as positive and false negative 
+($FN$) is the number of negative predictions that should be classified as positive. In 
+equation~\ref{eq:intro:precision} the set of $TP + FP$ describes all predictions that are assigned 
+positive. And in the calculation of recall $TP + FN$ is the set of all positive samples (ground 
+truth)~\cite{terven2023, zheng2022}. 
+
+For visualization precision and recall can be plotted in diagrams. To do so they are calculated 
+for various confidence thresholds of the network's prediction. It is also possible to combine them 
+afterwards in a joint precision-recall curve. When using a neural network there always is a 
+trade-off between a high number of detected objects (high recall) and an increasing false positive 
+rate (lower precision)~\cite{terven2023}.
+
+\subsubsection*{Intersection over Union}
+
+Another metric is \gls{acr-iou}. In object detection the goal is to accurately find the position of 
+entities. A common way to do so is by predicting bounding boxes. \gls{acr-iou} is a way to rate the 
+quality of those bounding boxes by comparing the predicted boxes with them from ground truth.
+
+\begin{equation}
+	\label{eq:intro:iou}
+	\text{IoU} = \frac{\text{Area of Overlap}}{\text{Area of Union}}
+\end{equation}    
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+		\draw  [color={rgb, 255:red, 76; green, 119; blue, 230 }  ,draw opacity=1 ][line width=2.25]  
+		(50,50) -- (100,50) -- (100,100) -- (50,100) -- cycle ;
+		\draw  [color={rgb, 255:red, 251; green, 129; blue, 11 }  ,draw opacity=1 ][line width=2.25]  
+		(80,60) -- (130,60) -- (130,110) -- (80,110) -- cycle ;
+		\draw  [color={rgb, 255:red, 76; green, 119; blue, 230 }  ,draw opacity=1 ][line width=2.25]  
+		(190,50) -- (240,50) -- (240,100) -- (190,100) -- cycle ;
+		\draw  [color={rgb, 255:red, 251; green, 129; blue, 11 }  ,draw opacity=1 ][line width=2.25]  
+		(200,60) -- (250,60) -- (250,110) -- (200,110) -- cycle ;
+		\draw  [color={rgb, 255:red, 76; green, 119; blue, 230 }  ,draw opacity=1 ][line width=2.25]  
+		(316,50) -- (366,50) -- (366,100) -- (316,100) -- cycle ;
+		\draw  [color={rgb, 255:red, 251; green, 129; blue, 11 }  ,draw opacity=1 ][line width=2.25]  
+		(312,54) -- (362,54) -- (362,104) -- (312,104) -- cycle ;
+		
+		\draw (51,22) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\text{IoU} = 0.32$};
+		\draw (51,122) node [anchor=north west][inner sep=0.75pt]   [align=left] {Poor};
+		
+		\draw (191,21) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\text{IoU} = 0.71$};
+		\draw (191,122) node [anchor=north west][inner sep=0.75pt]   [align=left] {Good};
+		
+		\draw (317,22) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\text{IoU} = 0.95$};
+		\draw (316,122) node [anchor=north west][inner sep=0.75pt]   [align=left] {Excellent};
+	\end{tikzpicture}
+	\caption{Examples of different Intersection over Union (IoU) values.}
+	\label{fig:intro:iou}
+\end{figure}
+
+In figure~\ref{fig:intro:iou} examples of different \gls{acr-iou} values and their correlating bounding 
+boxes are depicted. The blue square always shows the ground truth label while the orange box is 
+predicted by a neural network. As stated in equation~\ref{eq:intro:iou} the \gls{acr-iou} is calculated 
+by the ratio of the overlapping or intersecting area to the union area~\cite{terven2023}.
+
+\subsubsection*{Mean Average Precision}
+
+\gls{acr-mAP}, also reffered to as Average Precision ($AP$) in literature, is a metric that is commonly 
+used to evaluate the performance of object detection algorithms. It measures the average precision 
+over all classes and is based on the precision-recall metric as well as on the
+\gls{acr-iou}~\cite{terven2023}.
+
+The calculation of the mean average precision starts with the computation of the precision-recall 
+curve for each category. After that the category's \gls{acr-mAP} is calculated by averaging precision 
+values from the precision-recall curve at multiple recall thresholds. Finally the overall mean average 
+precision is derived by averaging the category's \gls{acr-mAP}. 
+
+In order to get the common metric $mAP_{50}$ the same calculation is done under the 
+constraint that the \gls{acr-iou} threshold is set to $0.5$. Calculating the $mAP_{50-95}$ is a 
+little bit more complex because the category's \gls{acr-mAP} is not computed for just one 
+\gls{acr-iou} threshold but for multiple in the range from $0.5$ to $0.95$ and step size $0.05$. At 
+last the category's \gls{acr-mAP} is additionally averaged over the different \gls{acr-iou} thresholds 
+and than the overall $mAP_{50-95}$ is calculated.
+
+\subsubsection*{F1 Score}
+
+The $F$ Score is a weighted combination of precision $P$ and recall $R$. As it can be seen in 
+equation~\ref{eq:intro:fscore} a coefficient $\beta$ is applied to the precision and recall 
+values~\cite{chaar2005, goutte2005, skopal2005}. 
+
+\begin{equation}
+	\label{eq:intro:fscore}
+	F_\beta = \frac{(1 + \beta^2) \cdot P \cdot R}{(\beta^2 \cdot P) + R}
+\end{equation} 
+
+A commonly used metric is the $F1$ score, that is defined as the harmonic mean of precision and 
+recall and can be obtained by choosing $\beta = 1$. Therefore the $F1$ score is a single ratio for 
+evaluation of inference performance and is an attempt to find the best compromise between 
+precision and recall. A Score of $F_1 = 1$ would be perfect~\cite{skopal2005}.
+
+\begin{equation}
+	\label{eq:intro:f1}
+	F_1 = \frac{2 \cdot P \cdot R}{P + R}
+\end{equation}   
+
+\subsection{Transfer learning}\label{subsec:intro:transferlearning}
+
+The transfer learning method was originally used by humans and is being transferred to machine 
+learning. Thereby knowledge from related domains is used to learn the target domain in a more 
+efficient way. That is particularly necessary when an insufficient amount of target training data is 
+available due to data being rare or rather inaccessible or expensive to collect or label. In those cases 
+existing datasets can be used to pre-train a machine learning model and after that a small number of 
+target data is enough to transfer the model onto the target domain~\cite{weiss2016}.
