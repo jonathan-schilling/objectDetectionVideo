@@ -2,16 +2,62 @@
 \glsresetall
 
 This chapter is about the application that was motivated in section~\ref{sec:intro:problem}. First of 
-all the concept is specified. After that the acquisition of data as well as the implementation is 
-described.
+all the concept is specified. After that the acquisition of data as well as the implementation of the 
+different components is described.
 
 \section{Concept}\label{sec:app:concept}
 
-The following concept is divided into two parts. The first part covers all the workflows for obtaining a 
-trained model and the second part describes how such a trained model can be used for inference on 
-new data.
+The following concept is divided into two parts. The first part describes the productive application 
+that transforms a Valorant video into another data representation using a pattern recognition 
+algorithm. The second part covers all workflows to train a machine learning model that is used in the 
+first part.
 
-\subsection{Training}\label{subsec:app:training}
+\subsection{Inference Application}\label{subsec:app:inference}
+
+The productive application consists of five elements:
+
+\begin{itemize}
+	\item[\textbf{I1:}] Raw data
+	\item[\textbf{I2:}] Data pre-processing
+	\item[\textbf{I3:}] Neural network model
+	\item[\textbf{I4:}] Post-processing algorithm
+	\item[\textbf{I5:}] Transformed data representation
+\end{itemize}
+
+As raw data (I1) videos with Valorant gameplay are used. Those videos show a screen as depicted in 
+figure~\ref{fig:intro:ingame}. Within this project the goal is to derive an alternative data 
+representation (I5) that helps players and trainers getting a better overview of single rounds. 
+Therefore it is important that the videos just show individual rounds and not a whole match. This is 
+secured in the data pre-processing step (I2). In order to generate a new representation that gives an 
+overview, the data over time is summarized and presented as a single image, like that in 
+figure~\ref{fig:app:output}. However, only the information from the minimap in the upper left corner 
+of the video is sufficient and due to training reasons, which are discussed in 
+section~\ref{subsec:app:training}, this part of the map is also extracted during pre-processing (I2). 
+The further steps are only performed on the cropped part of the video.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{images/05-output}
+	\caption[Output representation as map.]{Output representation as map, summarizing all positions 
+	of defender agents in one round on the map "Haven".}
+	\label{fig:app:output}
+\end{figure}
+
+Image~\ref{fig:intro:minimap} shows different entities that could be target of the detection 
+algorithm~(I3). One possibility is just to find all defender agents without distinguishing the specific 
+agent. The result of such an analysis is shown in figure~\ref{fig:app:output}. This is a graph that 
+summarizes all positions of the defending team on the already mentioned map "Haven". In a more 
+advanced approach it is possible to detect the specific agents and create motion profiles for 
+each of them. In addition, team or opponent abilities could also be recognized. It would be possible 
+as well to combine those detection tasks and then create various views to present the gathered 
+data. In order to generate evaluation data a model of a neural network (I3) is needed. This is trained 
+by the application described in section~\ref{subsec:app:training}. Finally a post-processing 
+algorithm (I4) transforms the output data from the neural network into a better recognizable form of 
+presentation (I5).
+
+\subsection{Training Application}\label{subsec:app:training}
+
+
 
 \begin{figure}
 	\centering
@@ -105,8 +151,6 @@ new data.
 	\caption{Concept for the training application.}
 	\label{fig:app:conceptTrain}
 \end{figure}
-
-\subsection{Inference}\label{subsec:app:inference}
 
 \section{Data}\label{sec:app:data}
 
