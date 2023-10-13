@@ -133,12 +133,12 @@ In the following section related work of this project and basic knowledge is out
 
 \subsection[Video: Valorant AI]{Valorant AI}\label{subsec:intro:video}
 
-First of all it is necessary to mention the Youtube video "I tried to make a Valorant AI using computer 
-vision"~\cite{river2021} again, because it has provided the idea for this project and comes close to 
-the work done within the scope of that project. What was done in the video is already described in 
+First of all the Youtube video "I tried to make a Valorant AI using computer vision"~\cite{river2021} 
+should be mentioned again, because it has provided the idea for this project and comes close to 
+the work done within the scope of that project. The content of this video is already described in 
 section~\ref{sec:intro:problem}. The video not only gave the idea but also shows some realization 
 possibilities which have been used and adapted for this project. In particular how data could be 
-created and that it uses YOLOv5~\cite{jocher2020} as learning framework.
+created and that it uses YOLOv5~\cite{jocher2020} as a learning framework.
 
 \subsection[Neural Network Framework: You Only Look Once]{You Only Look 
 Once}\label{subsec:intro:yolo}
@@ -150,7 +150,7 @@ part.
 
 YOLO was initially published in 2016 by \citeauthor{redmon2016}~\cite{redmon2016}. Back then it 
 was the first real-time end-to-end approach for object detection. In difference to other approaches it 
-introduced a way to complete the detection task within a single pass of the network. This 
+introduces a way to complete the detection task within a single pass of the network. This 
 characteristic makes it possible to perform object detection as real-time application and is the 
 reason why the framework is called YOLO\footnote{You Only Look Once}~\cite{terven2023}. 
 Alternative frameworks like R-CNN~\cite{girshick1994} from \citeyear{girshick1994} or Fast 
@@ -161,7 +161,7 @@ YOLO framework uses regression for both tasks~\cite{aydin2023, terven2023}.
 The development of YOLO continues to this day and miscellaneous authors have introduced 
 enhanced versions of the framework. The versions YOLOv5~\cite{jocher2020} and 
 YOLOv8~\cite{jocher2023}, for example, were developed by Ultralytics~\cite{ultralytics} with their 
-founder and CEO Glen Jocher. While version eight is completely new from January this year,  
+founder and CEO Glen Jocher. While version eight is completely new from January 2023,  
 YOLOv5 was published in 2020 but the latest release version 7.0 is also from 2023. Both 
 frameworks are open source and actively maintained by Ultralytics and other 
 contributors~\cite{terven2023}.
@@ -181,7 +181,7 @@ Consecutively metrics for evaluation of neural networks are introduced.
 
 \subsubsection*{Precision and Recall}
 
-Precision and Recall are two metrics that evaluate the correct predictions of neural networks. While 
+Precision and recall are two metrics that evaluate the correct predictions of neural networks. While 
 precision measures the accuracy of the positive predictions, recall quantifies the amount of correctly 
 determined positive labels. They can be calculated as follows: 
 
@@ -197,14 +197,13 @@ determined positive labels. They can be calculated as follows:
 
 Thereby true positive ($TP$) refers to the number of positive predictions that are classified 
 correctly. False positive ($FP$) predictions are incorrectly identified as positive and false negative 
-($FN$) is the number of negative predictions that should be classified as positive. In 
-equation~\ref{eq:intro:precision} the set of $TP + FP$ describes all predictions that are assigned 
-positive. And in the calculation of recall $TP + FN$ is the set of all positive samples (ground 
-truth)~\cite{terven2023, zheng2022}. 
+($FN$) vice versa. In equation~\ref{eq:intro:precision} the set of $TP + FP$ describes all predictions 
+that are assigned positive, while in the calculation of recall $TP + FN$ describes the set of ground 
+truth (all positive samples)~\cite{terven2023, zheng2022}. 
 
 For visualization precision and recall can be plotted in diagrams. To do so they are calculated 
 for various confidence thresholds of the network's prediction. It is also possible to combine them 
-afterwards in a joint precision-recall curve. When using a neural network there always is a 
+afterwards in a joint precision-recall curve. When using a neural network there is always a 
 trade-off between a high number of detected objects (high recall) and an increasing false positive 
 rate (lower precision)~\cite{terven2023}.
 
@@ -266,11 +265,11 @@ values from the precision-recall curve at multiple recall thresholds. Finally th
 precision is derived by averaging the category's \gls{acr-mAP}. 
 
 In order to get the common metric $mAP_{50}$ the same calculation is done under the 
-constraint that the \gls{acr-iou} threshold is set to $0.5$. Calculating the $mAP_{50-95}$ is a 
-little bit more complex because the category's \gls{acr-mAP} is not computed for just one 
-\gls{acr-iou} threshold but for multiple in the range from $0.5$ to $0.95$ and step size $0.05$. At 
-last the category's \gls{acr-mAP} is additionally averaged over the different \gls{acr-iou} thresholds 
-and than the overall $mAP_{50-95}$ is calculated.
+constraint that the \gls{acr-iou} threshold is set to $0.5$. Calculating the $mAP_{50-95}$ is more 
+complex because the category's \gls{acr-mAP} is not computed for just one \gls{acr-iou} threshold 
+but for multiple in the range from $0.5$ to $0.95$ and step size $0.05$. At last the category's 
+\gls{acr-mAP} is additionally averaged over the different \gls{acr-iou} thresholds and than the overall 
+$mAP_{50-95}$ is calculated.
 
 \subsubsection*{F1 Score}
 
