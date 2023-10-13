@@ -26,8 +26,8 @@ The productive application consists of five elements:
 
 As raw data (I1) videos with Valorant gameplay are used. Those videos show a screen as depicted in 
 figure~\ref{fig:intro:ingame}. Within this project the goal is to derive an alternative data 
-representation (I5) that helps players and trainers getting a better overview of single rounds. 
-Therefore it is important that the videos just show individual rounds and not a whole match. This is 
+representation (I5) that helps players and trainers to get a better overview of single rounds. 
+Therefore it is important that the videos just contain individual rounds and not a whole match. This is 
 secured in the data pre-processing step (I2). In order to generate a new representation that gives an 
 overview, the data over time is summarized and presented as a single image, like that in 
 figure~\ref{fig:app:output}. However, only the information from the minimap in the upper left corner 
@@ -39,25 +39,41 @@ The further steps are only performed on the cropped part of the video.
 	\centering
 	\includegraphics[width=0.8\linewidth]{images/05-output}
 	\caption[Output representation as map.]{Output representation as map, summarizing all positions 
-	of defender agents in one round on the map "Haven".}
+	of defender agents during one round on the map "Haven".}
 	\label{fig:app:output}
 \end{figure}
 
-Image~\ref{fig:intro:minimap} shows different entities that could be target of the detection 
-algorithm~(I3). One possibility is just to find all defender agents without distinguishing the specific 
-agent. The result of such an analysis is shown in figure~\ref{fig:app:output}. This is a graph that 
-summarizes all positions of the defending team on the already mentioned map "Haven". In a more 
-advanced approach it is possible to detect the specific agents and create motion profiles for 
-each of them. In addition, team or opponent abilities could also be recognized. It would be possible 
-as well to combine those detection tasks and then create various views to present the gathered 
-data. In order to generate evaluation data a model of a neural network (I3) is needed. This is trained 
-by the application described in section~\ref{subsec:app:training}. Finally a post-processing 
-algorithm (I4) transforms the output data from the neural network into a better recognizable form of 
-presentation (I5).
+Image~\ref{fig:intro:minimap} shows different entities that could be possible targets of the detection 
+algorithm~(I3). One possibility is just to find all players from one team without distinguishing the 
+specific agent. The result of such an analysis is shown in figure~\ref{fig:app:output}. This is a graph 
+that summarizes all positions of the defending team during a round on the already mentioned map 
+"Haven". In a more advanced approach it is possible to detect the specific agents and create motion 
+profiles for each of them. In addition, team or opponent abilities could also be recognized. It would 
+be possible as well to combine those detection tasks and create various views to present the 
+gathered data. The translation of the data from the video to the new representation is done by a 
+neural network (I3). This is trained by the application described in section~\ref{subsec:app:training}. 
+Finally a post-processing algorithm (I4) transforms the output data from the neural network into a 
+better recognizable form of presentation (I5).
 
 \subsection{Training Application}\label{subsec:app:training}
 
+As written in section~\ref{subsec:app:inference} a trained neural network model is needed to 
+transform a Valorant video into another form of representation. This part discusses a concept for an 
+application that starts with raw data and outputs a trained machine learning model. That concept is 
+outlined in figure~\ref{fig:app:conceptTrain} and differentiates between applications in purple, data 
+in blue and programs in green.
 
+For the acquiring of raw data multiple sources are available, in this concept called data platforms. 
+From there the data has to be extracted for further usage. For this purpose an extractor is intended.
+The most intuitive source is the game itself and everything that is rendered on the users screen. In 
+that case the extractor is a screen capture device/program that records the screen and outputs a 
+video. Other sources are already recorded videos, for example from gamers who upload their 
+matches on Youtube for entertainment purposes. But Youtube is not the only platform: as in the 
+introduction (Chapter~\ref{chpt:introduction}) mentioned especially during corona pandemic 
+streaming platforms like Twitch became a hype and there are many creators who live stream their 
+Valorant gameplay. So this data could be captured directly while they are streaming or afterwards, 
+because the streams are saved so that people can watch it again. In the case of available videos a 
+download script is needed to get the data from the platforms.
 
 \begin{figure}
 	\centering
@@ -151,6 +167,23 @@ presentation (I5).
 	\caption{Concept for the training application.}
 	\label{fig:app:conceptTrain}
 \end{figure}
+
+In the training application the acquired raw data is available in video format. In order to train a neural 
+network several pre-processing steps are necessary to transform the raw data into a usable dataset. 
+Therefore a data pre-processing component has to be built. The task of this module is to separate 
+the video into individual frames, crop the frames onto the minimap, label the created images of the 
+minimap and build a dataset. The pictures of the cropped minimap are reffered to as crops in the 
+context of this project.
+
+The first step of splitting the video into frames has to be made, because the neural network is 
+trained with images even though inference is done on videos. The reason is that the annotation of 
+images is easier than with videos. As noted in section~\ref{subsec:app:inference} the information 
+from the minimap is sufficient and therefore the frames become cropped onto the minimap. That 
+results in significant smaller images, which need less memory and a lot irrelevant and disturbing 
+information is discarded. With the labeling step annotations are created that describe where 
+detectable entities are in the image. These labels are used by the neural network as ground truth 
+during training. Finally the crops and the labels are combined into a dataset that can be used by the 
+machine learning model.
 
 \section{Data}\label{sec:app:data}
 
