@@ -29,7 +29,7 @@ figure~\ref{fig:intro:ingame}. Within this project the goal is to derive an alte
 representation (I5) that helps players and trainers to get a better overview of single rounds. 
 Therefore it is important that the videos just contain individual rounds and not a whole match. This is 
 secured in the data pre-processing step (I2). In order to generate a new representation that gives an 
-overview, the data over time is summarized and presented as a single image, like that in 
+overview, the data over time is summarized and presented as a single image (I5), like that in 
 figure~\ref{fig:app:output}. However, only the information from the minimap in the upper left corner 
 of the video is sufficient and due to training reasons, which are discussed in 
 section~\ref{subsec:app:training}, this part of the map is also extracted during pre-processing (I2). 
@@ -70,10 +70,10 @@ that case the extractor is a screen capture device/program that records the scre
 video. Other sources are already recorded videos, for example from gamers who upload their 
 matches on Youtube for entertainment purposes. But Youtube is not the only platform: as in the 
 introduction (Chapter~\ref{chpt:introduction}) mentioned especially during corona pandemic 
-streaming platforms like Twitch became a hype and there are many creators who live stream their 
-Valorant gameplay. So this data could be captured directly while they are streaming or afterwards, 
-because the streams are saved so that people can watch it again. In the case of available videos a 
-download script is needed to get the data from the platforms.
+streaming platforms like Twitch~\cite{twitch} became a hype and there are many creators who live 
+stream their Valorant gameplay. So this data could be captured directly while they are streaming or 
+afterwards, because the streams are saved so that people can watch it again. In the case of available 
+videos a download script is needed to get the data from the platforms.
 
 \begin{figure}
 	\centering
@@ -186,6 +186,49 @@ during training. Finally the crops and the labels are combined into a dataset th
 machine learning model.
 
 \section{Data}\label{sec:app:data}
+
+This section describes the data that is actually used to carry out this project. Twitch serves as the 
+data platform and a video~\cite{valVideo2023} of professionals playing at the Valorant 
+Champions Tour 2023 in Los Angeles was downloaded. The chosen part of the video shows a match 
+between the European team FNATIC and the American team LOUD. They played on three different 
+maps (Ascent, Haven and Split). The video was downloaded with the tool yt-dlp~\cite{ytdlp2023} 
+and the download script~\ref{lst:app:download}. 
+
+\begin{minipage}{\linewidth}
+	\vspace*{0.5cm}
+	\begin{lstlisting}[language=Bash, keywordstyle=\color{black}, 
+		caption=Download script to get the raw data., label=lst:app:download]
+		#!/bin/bash
+		
+		s="$1"		# start timestamp
+		e="$2"		# end timestamp
+		n="$3"		# output name
+		
+		yt-dlp --external-downloader ffmpeg --external-downloader-args 
+		"ffmpeg_i:-ss "$s".00 -to "$e".00" --output ""$n".mp4" 
+		https://www.twitch.tv/videos/1907425469
+	\end{lstlisting}
+\end{minipage}
+
+That script gets a start and an end timestamp and downloads the specified sequence of the selected 
+video. With that technique the original video became downloaded without replays and 
+non-gameplay. Consistent with the requirements the match was simultaneously split into single 
+rounds. Therefore raw gameplay of three maps is available for further use within the project.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/06-input}
+	\caption[Cropped input data.]{Cropped input data from the map "Haven".}
+	\label{fig:app:input}
+\end{figure}
+
+The downloaded sequences show a different screen than depicted so far. The reason is that 
+this video was part of the official sports reporting and therefore it is from observer view. The 
+difference can be seen in figure~\ref{fig:app:input}. From players perspective only the agents of the 
+same team and some enemy abilities can be seen on the minimap (see 
+image~\ref{fig:intro:minimap}). The positions of opponents stay hidden. In contrast for spectators all 
+players are visible on the map. That is advantageous for the learning task, because with that data the 
+view of attackers and defenders can be trained at once. 
 
 \section{YOLOv5}\label{sec:app:yolov5}
 
