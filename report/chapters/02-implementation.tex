@@ -232,7 +232,72 @@ view of attackers and defenders can be trained at once.
 
 \section{YOLOv5}\label{sec:app:yolov5}
 
+As machine learning model YOLOv5~\cite{jocher2020} was chosen because the usability of 
+Ultralytics version is very good and feasibility already was proven. In addition, it is open source and 
+continues to be actively developed~\cite{terven2023, river2021}. Furthermore with YOLOv5 
+pre-trained checkpoints can be used for transfer learning~\cite{jocher2020}.
+
+YOLOv5 is the first version that uses PyTorch~\cite{pytorch} instead of Darknet~\cite{darknet13} as 
+machine learning framework. Both of them are open source and Darknet was developed by Joseph 
+Redmon the first author of "You Only Look Once". While Darknet is written C and CUDA, PyTorch 
+uses Python and makes training and testing easier for customized datasets~\cite{darknet13, 
+pytorch, aydin2023, terven2023}. The architecture of YOLOv5 is divided into three parts: backbone, 
+neck and head~\cite{archYolov5}. That is a common architecture of object 
+detectors~\cite{terven2023}. 
+
+In general the backbone is used to extract features from the input image and that is done with a 
+\gls{acr-cnn}. Thereby earlier layers extract low-level features like edges and textures and deeper 
+layers are used for detection of higher-level entities (object parts and semantic information). The 
+neck connects the backbone and the head with additional convolutional layers, a \gls{acr-fpn} or 
+other components that improve the feature representations from the backbone. Whilst the goal of 
+the backbone is to capture features at different scales the focus of the neck is to enhance the spatial 
+and semantic information across those different scales. The head makes the actual predictions on 
+the provided features and mostly consists of several task-specific subnetworks for localization and 
+classification. Predictions are made for each object candidate and in a post-processing step only the 
+most confident detections are kept. A possible algorithm to filter out overlapping predictions is 
+\gls{acr-nms}~\cite{terven2023}.
+
+The backbone of YOLOv5 is a modified CSPDarknet53 a \gls{acr-cnn} with 53 convolutional 
+layers~\cite{terven2023, redmon2018, wang2020}. It starts with a  layer that has a large window size 
+(called stem) and has the goal to reduce memory and computational costs. Further each 
+convolutional block consists of a convolutional layer followed by \gls{acr-bn} and a \gls{acr-silu} 
+activation. The neck contains a \gls{acr-sppf} layer that processes the features at different scales 
+and intends to speed up computation by pooling the different scaled features into a fixed-size 
+feature map. Afterwards upsample layers increase the resolution of those feature 
+maps~\cite{terven2023}. The complete architecture of YOLOv5 is depicted in 
+figure~\ref{fig:aa:archyolov5}.
+
+As mentioned before \gls{acr-nms} is a post-processing algorithm, with the goal to reduce the 
+number of overlapping predictions. During detection the neural network generates so called 
+bounding boxes to describe the location and size of an object~\cite{anchor2023}, but typically it is 
+generating multiple boxes per entity and each bounding box has a different confidence score. 
+\GLS{acr-nms} is used to filter out irrelevant bounding boxes by keeping just the most accurate per 
+object. Therefore an \gls{acr-iou} and confidence threshold is defined for 
+inference~\cite{terven2023}.
+
+For training YOLOv5 can use data augmentation techniques, helping to improve the generalization 
+ability and to reduce overfitting. The following two were used to train the experiments described in 
+chapter~\ref{chpt:evaluation}. The first technique is called mosaic augmentation and thereby 
+multiple images are combined into on large image with the goal to improve the handling of different 
+object scales and translations. The second one is called HSV augmentation and randomly changes 
+hue, saturation and value of the images and therefore creates a bigger variance in the learned 
+data~\cite{archYolov5}.
+
+Finally the training strategy AutoAnchor has to be described. This is an algorithm developed by 
+Ultralytics~\cite{terven2023, archYolov5}. The training of YOLOv5 is based on anchor boxes with 
+aim on improving the prediction quality. Later versions of YOLO did not need anchor boxes 
+anymore~\cite{terven2023, zheng2022}. As mentioned before, the predictions of objects are based 
+on bounding boxes, but unfortunately the objects have different shapes and sizes and so the boxes 
+must have those too. For that so called anchors are used which are building a predefined set of 
+bounding boxes with different shapes and sizes. The detection algorithm then has to decide which 
+anchor matches best~\cite{anchor2023}. Ultralytics AutoAnchor algorithm is a pre-training tool that 
+adjusts the predefined anchor boxes to better fit the ground truth boxes of custom 
+datasets~\cite{terven2023, archYolov5}.
+
 \section{Implementation}\label{sec:app:impl}
+
+This section gives an overview of the realization of this project, starting from the point that the raw 
+data is available as multiple videos showing single rounds of the game Valorant.
 
 \section{Dataset}\label{sec:app:dataset}
 
