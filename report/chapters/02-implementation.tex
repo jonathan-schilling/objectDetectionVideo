@@ -12,7 +12,7 @@ that transforms a Valorant video into another data representation using a patter
 algorithm. The second part covers all workflows to train a machine learning model that is used in the 
 first part of the concept.
 
-\subsection{Inference Application}\label{subsec:app:inference}
+\subsection{Inference Application}\label{subsec:app:inferenceapp}
 
 The productive application consists of five elements:
 
@@ -57,7 +57,7 @@ data from the neural network into a better recognizable form of presentation (I5
 
 \subsection{Training Application}\label{subsec:app:trainingapp}
 
-As written in section~\ref{subsec:app:inference} a trained neural network model is needed to 
+As written in section~\ref{subsec:app:inferenceapp} a trained neural network model is needed to 
 transform a Valorant video into another form of representation. This part discusses a concept for an 
 application that starts with raw data and outputs a trained machine learning model. That concept is 
 outlined in figure~\ref{fig:app:conceptTrain} and differentiates between applications in purple, data 
@@ -178,7 +178,7 @@ context of this project's implementation and in image~\ref{fig:app:conceptTrain}
 
 The first step of splitting the video into frames has to be done, because the neural network is 
 trained with images even though inference is done on videos. The reason is that the annotation of 
-images is easier than with videos. As noted in section~\ref{subsec:app:inference} the information 
+images is easier than with videos. As noted in section~\ref{subsec:app:inferenceapp} the information 
 from the minimap is sufficient and therefore the frames become cropped onto the minimap. That 
 results in significant smaller images, which need less memory and a lot of irrelevant and disturbing 
 information is discarded. Annotations describing where detectable entities are in the image are 
@@ -240,8 +240,8 @@ pre-trained checkpoints can be used for transfer learning~\cite{jocher2020}.
 
 YOLOv5 is the first version that uses PyTorch~\cite{pytorch} instead of Darknet~\cite{darknet13} as 
 machine learning framework in the YOLO series. Both of them are open source and Darknet was 
-developed by Joseph Redmon the first author of "You Only Look Once". While Darknet is written in C 
-and CUDA, PyTorch uses Python and makes training and testing easier for customized 
+developed by Joseph Redmon the first author of "You Only Look Once". While Darknet is 
+written in C and CUDA, PyTorch uses Python and makes training and testing easier for customized 
 datasets~\cite{darknet13, pytorch, aydin2023, terven2023}. The architecture of YOLOv5 is divided 
 into three parts: backbone, neck and head~\cite{archYolov5}. That is a common architecture for 
 object detectors~\cite{terven2023}. 
@@ -367,5 +367,96 @@ available and that every agent on the minimap has the same size. Therefore one d
 bounding box can be used to bring the labels into YOLO format and build the dataset.
 
 \subsection{Training}\label{subsec:app:training}
+
+This section describes how YOLOv5 can be trained with a custom dataset. First of all a separate 
+python environment is recommended and YOLO has to be downloaded from 
+GitHub\footnote{\url{https://github.com/ultralytics/yolov5}}.  In the repository a requirements file can 
+be found and it is necessary to install all listed packages. Per default a CPU version of PyTorch is 
+installed, if a GPU is available the appropriate version has to be switched. This project was 
+implemented on a Windows computer with a NVIDIA GeForce GTX 1660 SUPER with 6 GB graphics 
+memory. This setup was not compatible with the latest version of PyTorch and CUDA. Therefore 
+Python 3.9 and PyTorch 1.10.1 with CUDA 10.2 had to be installed.
+
+After completing the installation YOLOv5 is ready for usage. A Python script starting the training is 
+available in the root folder of the repository and a general call of the script is specified in 
+instruction~\ref{lst:app:traincmd}. 
+
+\renewcommand{\lstlistingname}{Instruction}
+\begin{minipage}{\linewidth}
+	\vspace*{0.5cm}
+	\begin{lstlisting}[language=Bash, keywordstyle=\color{black}, 
+		caption=General command to start the training of YOLOv5., label=lst:app:traincmd]
+		python train.py
+		
+			--epochs <NUM_EPOCHS>
+			--batch-size <BATCH_SIZE>
+			
+			--weights yolov5s.pt
+			--img 384
+			--optimizer SGD
+			
+			--data <PATH_TO_DATASET>.yaml
+			--project <PATH_TO_PROJECT>
+			--name train
+			
+			--cache ram
+			--device cuda:0
+			--save-period 10
+	\end{lstlisting}
+\end{minipage}
+
+Besides the number of epochs and the batch size the path to a configuration file inside the used 
+dataset has to be specified (line 10). The project path (line 11) describes the target folder where all 
+output files of the training run are saved. Additionally the image size is set to 384 pixels because of 
+the resolution of the cropped maps and the optimizer SGD is a default setting of YOLOv5. 
+Furthermore data is cached in the RAM instead of the disk what speeds up training and as device the 
+available GPU is chosen. Finally the weights of the network are saved every 10 epochs.
+
+If transfer learning is used or training starts from scratch is decided by specifying \texttt{weights} 
+for the network. In the case of instruction~\ref{lst:app:traincmd} transfer learning is applied. YOLOv5 
+is published in five scaled versions, with different width and depth of the convolutional modules. 
+They were created that YOLOv5 can be used with different hardware 
+requirements~\cite{jocher2020, terven2023}. In this project the second smallest version was chosen 
+and is specified by \texttt{yolov5s.pt}, with \texttt{s} for small. This is a lightweight model for 
+low-resource devices~\cite{terven2023}. Those weights are trained for 80 classes on the Microsoft 
+COCO (Common Objects in Context) dataset~\cite{lin2014, jocher2020}. For training from scratch 
+the specification of the \texttt{weights} must be let empty and a network configuration file has to be 
+provided. 
+
+A special option for transfer learning is the \texttt{freeze} command. With that a number of 
+layers are not trained. As mentioned at the beginning of section~\ref{sec:app:impl}, it makes sense 
+to train the backbone on a large-scale image classification task such as the COCO dataset. 
+
+%TODO freeze Command lässt backbone zb weg 
+%TODO cite y5TransfLearn
+
+\subsection{Inference}\label{subsec:app:inference}
+
+\begin{minipage}{\linewidth}
+	\vspace*{0.5cm}
+	\begin{lstlisting}[language=Bash, keywordstyle=\color{black}, 
+		caption=General command to start the detection with YOLOv5., label=lst:app:inferencecmd]
+		python detect.py
+		
+			--weights <PATH_TO_PROJECT>/train/weights/best.pt
+			
+			--source <PATH_TO_DATA>
+			--project <PATH_TO_PROJECT>/detect
+			--name <NAME_OF_DETECT_TASK>
+			
+			--conf-thres 0.8
+			
+			--augment
+			--line-thickness 2
+			--hide-labels
+			--view-img
+			--save-txt
+			--save-conf
+			--device cuda:0
+			
+			
+			(--save-crop)
+	\end{lstlisting}
+\end{minipage}
 
 \section{Summary}\label{sec:app:summary}
