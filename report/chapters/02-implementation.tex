@@ -10,7 +10,7 @@ different components is described.
 The following concept is divided into two parts. The first part describes the productive application 
 that transforms a Valorant video into another data representation using a pattern recognition 
 algorithm. The second part covers all workflows to train a machine learning model that is used in the 
-first part.
+first part of the concept.
 
 \subsection{Inference Application}\label{subsec:app:inference}
 
@@ -25,15 +25,15 @@ The productive application consists of five elements:
 \end{itemize}
 
 As raw data (I1) videos with Valorant gameplay are used. Those videos show a screen as depicted in 
-figure~\ref{fig:intro:ingame}. Within this project the goal is to derive an alternative data 
+figure~\ref{fig:intro:ingame}. The goal of this project is to derive an alternative data 
 representation (I5) that helps players and trainers to get a better overview of single rounds. 
 Therefore it is important that the videos just contain individual rounds and not a whole match. This is 
-secured in the data pre-processing step (I2). In order to generate a new representation that gives an 
-overview, the data over time is summarized and presented as a single image (I5), like that in 
-figure~\ref{fig:app:output}. However, only the information from the minimap in the upper left corner 
-of the video is sufficient and due to training reasons, which are discussed in 
-section~\ref{subsec:app:training}, this part of the map is also extracted during pre-processing (I2). 
-The further steps are only performed on the cropped part of the video.
+secured in the data pre-processing step (I2). In order to generate a new representation giving an 
+overview, the data over time are summarized and presented as a single image (I5), like that in 
+figure~\ref{fig:app:output}. However, only the information shown in the minimap in the upper left 
+corner of the video is sufficient and due to training reasons, which are discussed in 
+section~\ref{subsec:app:trainingapp}, this part of the map is also extracted during pre-processing 
+(I2). The further steps are only performed on the cropped part of the video.
 
 \begin{figure}
 	\centering
@@ -44,18 +44,18 @@ The further steps are only performed on the cropped part of the video.
 \end{figure}
 
 Image~\ref{fig:intro:minimap} shows different entities that could be possible targets of the detection 
-algorithm~(I3). One possibility is just to find all players from one team without distinguishing the 
-specific agent. The result of such an analysis is shown in figure~\ref{fig:app:output}. This is a graph 
-that summarizes all positions of the defending team during a round on the already mentioned map 
-"Haven". In a more advanced approach it is possible to detect the specific agents and create motion 
-profiles for each of them. In addition, team or opponent abilities could also be recognized. It would 
-be possible as well to combine those detection tasks and create various views to present the 
-gathered data. The translation of the data from the video to the new representation is done by a 
-neural network (I3). This is trained by the application described in section~\ref{subsec:app:training}. 
-Finally a post-processing algorithm (I4) transforms the output data from the neural network into a 
-better recognizable form of presentation (I5).
+algorithm~(I3). One possibility could be an identification of all players from one team without 
+distinguishing the specific agent. The result of such an analysis is shown in 
+figure~\ref{fig:app:output}. This graphic summarizes all positions of the defending team during a 
+round on the already mentioned map "Haven". In a more advanced approach it is possible to detect 
+the specific agents and create motion profiles for each of them. In addition, team or opponent 
+abilities could also be recognized. It would be possible as well to combine those detection tasks and 
+create various views to present the gathered data. The translation of the data from the video to the 
+new representation is done by a neural network (I3). This is trained by the application described in 
+section~\ref{subsec:app:trainingapp}. Finally a post-processing algorithm (I4) transforms the output 
+data from the neural network into a better recognizable form of presentation (I5).
 
-\subsection{Training Application}\label{subsec:app:training}
+\subsection{Training Application}\label{subsec:app:trainingapp}
 
 As written in section~\ref{subsec:app:inference} a trained neural network model is needed to 
 transform a Valorant video into another form of representation. This part discusses a concept for an 
@@ -64,16 +64,17 @@ outlined in figure~\ref{fig:app:conceptTrain} and differentiates between applica
 in blue and programs in green.
 
 For the acquiring of raw data multiple sources are available, in this concept called data platforms. 
-From there the data has to be extracted for further usage. For this purpose an extractor is intended.
+An extractor module is intended to obtain the data from those platforms for further usage.
 The most intuitive source is the game itself and everything that is rendered on the users screen. In 
 that case the extractor is a screen capture device/program that records the screen and outputs a 
 video. Other sources are already recorded videos, for example from gamers who upload their 
 matches on Youtube for entertainment purposes. But Youtube is not the only platform: as in the 
 introduction (Chapter~\ref{chpt:introduction}) mentioned especially during corona pandemic 
-streaming platforms like Twitch~\cite{twitch} became a hype and there are many creators who live 
-stream their Valorant gameplay. So this data could be captured directly while they are streaming or 
-afterwards, because the streams are saved so that people can watch it again. In the case of available 
-videos a download script is needed to get the data from the platforms.
+streaming platforms like Twitch~\cite{twitch} became popular and there are many creators live 
+streaming their Valorant gameplay. So this data could be captured directly while they are streaming 
+or afterwards, because the streams are saved to ensure a possibility for people to watch the stream 
+after it was broadcasted. In the case of available videos a download script is needed to get the data 
+from the platforms.
 
 \begin{figure}
 	\centering
@@ -173,15 +174,15 @@ network several pre-processing steps are necessary to transform the raw data int
 Therefore a data pre-processing component has to be built. The task of this module is to separate 
 the video into individual frames, crop the frames onto the minimap, label the created images of the 
 minimap and build a dataset. The pictures of the cropped minimap are reffered to as crops in the 
-context of this project.
+context of this project's implementation and in image~\ref{fig:app:conceptTrain}.
 
-The first step of splitting the video into frames has to be made, because the neural network is 
+The first step of splitting the video into frames has to be done, because the neural network is 
 trained with images even though inference is done on videos. The reason is that the annotation of 
 images is easier than with videos. As noted in section~\ref{subsec:app:inference} the information 
 from the minimap is sufficient and therefore the frames become cropped onto the minimap. That 
-results in significant smaller images, which need less memory and a lot irrelevant and disturbing 
-information is discarded. With the labeling step annotations are created that describe where 
-detectable entities are in the image. These labels are used by the neural network as ground truth 
+results in significant smaller images, which need less memory and a lot of irrelevant and disturbing 
+information is discarded. Annotations describing where detectable entities are in the image are 
+created in the labeling step. These labels are used by the neural network as ground truth 
 during training. Finally the crops and the labels are combined into a dataset that can be used by the 
 machine learning model.
 
@@ -226,7 +227,7 @@ The downloaded sequences show a different screen than depicted so far. The reaso
 this video was part of the official sports reporting and therefore it is from observer view. The 
 difference can be seen in figure~\ref{fig:app:input}. From players perspective only the agents of the 
 same team and some enemy abilities can be seen on the minimap (see 
-image~\ref{fig:intro:minimap}). The positions of opponents stay hidden. In contrast for spectators all 
+image~\ref{fig:intro:minimap}) but the opponents positions stay hidden. In contrast for spectators all 
 players are visible on the map. That is advantageous for the learning task, because with that data the 
 view of attackers and defenders can be trained at once. 
 
@@ -238,18 +239,18 @@ continues to be actively developed~\cite{terven2023, river2021}. Furthermore wit
 pre-trained checkpoints can be used for transfer learning~\cite{jocher2020}.
 
 YOLOv5 is the first version that uses PyTorch~\cite{pytorch} instead of Darknet~\cite{darknet13} as 
-machine learning framework. Both of them are open source and Darknet was developed by Joseph 
-Redmon the first author of "You Only Look Once". While Darknet is written C and CUDA, PyTorch 
-uses Python and makes training and testing easier for customized datasets~\cite{darknet13, 
-pytorch, aydin2023, terven2023}. The architecture of YOLOv5 is divided into three parts: backbone, 
-neck and head~\cite{archYolov5}. That is a common architecture of object 
-detectors~\cite{terven2023}. 
+machine learning framework in the YOLO series. Both of them are open source and Darknet was 
+developed by Joseph Redmon the first author of "You Only Look Once". While Darknet is written in C 
+and CUDA, PyTorch uses Python and makes training and testing easier for customized 
+datasets~\cite{darknet13, pytorch, aydin2023, terven2023}. The architecture of YOLOv5 is divided 
+into three parts: backbone, neck and head~\cite{archYolov5}. That is a common architecture for 
+object detectors~\cite{terven2023}. 
 
 In general the backbone is used to extract features from the input image and that is done with a 
 \gls{acr-cnn}. Thereby earlier layers extract low-level features like edges and textures and deeper 
 layers are used for detection of higher-level entities (object parts and semantic information). The 
 neck connects the backbone and the head with additional convolutional layers, a \gls{acr-fpn} or 
-other components that improve the feature representations from the backbone. Whilst the goal of 
+other components that improve the feature representations from the backbone. While the goal of 
 the backbone is to capture features at different scales the focus of the neck is to enhance the spatial 
 and semantic information across those different scales. The head makes the actual predictions on 
 the provided features and mostly consists of several task-specific subnetworks for localization and 
@@ -258,7 +259,7 @@ most confident detections are kept. A possible algorithm to filter out overlappi
 \gls{acr-nms}~\cite{terven2023}.
 
 The backbone of YOLOv5 is a modified CSPDarknet53 a \gls{acr-cnn} with 53 convolutional 
-layers~\cite{terven2023, redmon2018, wang2020}. It starts with a  layer that has a large window size 
+layers~\cite{terven2023, redmon2018, wang2020}. It starts with a  layer with a large window size 
 (called stem) and has the goal to reduce memory and computational costs. Further each 
 convolutional block consists of a convolutional layer followed by \gls{acr-bn} and a \gls{acr-silu} 
 activation. The neck contains a \gls{acr-sppf} layer that processes the features at different scales 
@@ -268,8 +269,8 @@ maps~\cite{terven2023}. The complete architecture of YOLOv5 is depicted in
 figure~\ref{fig:aa:archyolov5}.
 
 As mentioned before \gls{acr-nms} is a post-processing algorithm, with the goal to reduce the 
-number of overlapping predictions. During detection the neural network generates so called 
-bounding boxes to describe the location and size of an object~\cite{anchor2023}, but typically it is 
+number of overlapping predictions. The neural network generates so called bounding boxes during 
+detection, to describe the location and size of an object~\cite{anchor2023}, but typically it is 
 generating multiple boxes per entity and each bounding box has a different confidence score. 
 \GLS{acr-nms} is used to filter out irrelevant bounding boxes by keeping just the most accurate per 
 object. Therefore an \gls{acr-iou} and confidence threshold is defined for 
@@ -278,7 +279,7 @@ inference~\cite{terven2023}.
 For training YOLOv5 can use data augmentation techniques, helping to improve the generalization 
 ability and to reduce overfitting. The following two were used to train the experiments described in 
 chapter~\ref{chpt:evaluation}. The first technique is called mosaic augmentation and thereby 
-multiple images are combined into on large image with the goal to improve the handling of different 
+multiple images are combined into a large image with the goal to improve the handling of different 
 object scales and translations. The second one is called HSV augmentation and randomly changes 
 hue, saturation and value of the images and therefore creates a bigger variance in the learned 
 data~\cite{archYolov5}.
@@ -297,8 +298,74 @@ datasets~\cite{terven2023, archYolov5}.
 \section{Implementation}\label{sec:app:impl}
 
 This section gives an overview of the realization of this project, starting from the point that the raw 
-data is available as multiple videos showing single rounds of the game Valorant.
+data is available as multiple videos showing single rounds of the game Valorant. The objective of this 
+project was to carry out a machine learning project as realistic as possible. Due to that an 
+application scenario was defined: the creation of an application that is capable to analyze gameplay 
+of the video game Valorant. On this scenario the goal was to start with acquiring and pre-processing 
+of data, training a machine learning model and post-process the output. An important intention was 
+trying to use an already existing model and apply training, evaluation and inference on that, instead 
+of implementing a preformed architecture. The reason is that the existing learning framework can 
+provide pre-trained weights that can be used for transfer learning. Especially for the backbone it is 
+good to be trained on a large-scale image classification task~\cite{terven2023} and that is not 
+efficiently possible on a performance limited private GPU. Therefore it is interesting to compare the 
+performance of a learning task form scratch with one using transfer learning (see 
+chapter~\ref{chpt:evaluation}).
 
-\section{Dataset}\label{sec:app:dataset}
+The first big task was the pre-processing of the data. As mentioned in the concept, labeling of 
+images is easier than on videos. Since YOLOv5 can be trained on pictures and afterwards applied on 
+videos, images as training data were created. Therefore several python scripts were implemented 
+that split the videos into single frames (one per second) and than crop them to the minimap. Those 
+steps result in images like the one depicted in figure~\ref{fig:app:input} with a resolution of 384 by 
+384 pixels. After that labels had to be created manually, which then can serve as ground truth for 
+the training. For this purpose the open source labeling tool "Label Studio"~\cite{labelstudio} was 
+used.
+
+\subsection{Label Studio}\label{subsec:app:labelstudio}
+
+Label Studio is a web application that can be hosted by yourself. It can be installed via python and 
+the server runs locally in the simplest configuration. In a first step Label Studio has to be initialized 
+and a user must be created. Following a new project for the labeling task can be set up via the web 
+interface. It is possible to reference the local images and configure the labels. As labeling is very 
+time consuming, only a distinction between attackers and defenders was made in this project. In 
+figure~\ref{fig:app:labelstudio} the labeling interface of Label Studio is depicted. As it can be seen  
+round labels were used, because with them it was easy to set a point into the middle of each 
+agent. Initially it was planned to label the images of all three available maps. This turned out to be a 
+very time-consuming process, although a single label could be created very fast with the used 
+settings. Therefore only 1000 images of the map "Ascent" were labeled and it only was possible to 
+train the neural network with this data. When labeling was finished the labels were exported in XML 
+format. That file contains information about the position of all objects and their assigned class for 
+each image.
+
+\begin{figure}
+	\centering
+	%\includegraphics[width=0.7\linewidth]{} %TODO insert image of Label Studio
+	\caption[Interface of Label Studio.]{Labeling interface of Label Studio.}
+	\label{fig:app:labelstudio}
+\end{figure}
+
+\subsection{Dataset}\label{subsec:app:dataset}
+
+After labeling, the images and labels had to be combined into a dataset that can be used by 
+YOLOv5. The learning framework YOLO comes with its own dataset format and for that reason a 
+parser was implemented to create an appropriate dataset. Since the used neural network creates 
+bounding boxes it is necessary that ground truth also contains those boxes but so far only the 
+centers of the objects were labeled. 
+
+In YOLO format one file is created for every image and this file contains per object one line with the 
+following information~\cite{yoloLabels}:
+
+\begin{itemize}
+	\item class label
+	\item $x$ center of the object
+	\item $y$ center of the object
+	\item width of the bounding box
+	\item height of the bounding box
+\end{itemize}
+
+Advantageous is that the class label as well as the $x$ and $y$ centers of the object already are 
+available and that every agent on the minimap has the same size. Therefore one default size of the 
+bounding box can be used to bring the labels into YOLO format and build the dataset.
+
+\subsection{Training}\label{subsec:app:training}
 
 \section{Summary}\label{sec:app:summary}
