@@ -20,7 +20,7 @@ python train.py
 	
 	--cache ram
 	--device cuda:0
-	--save-period 10
+	--save-period 5
 ```
 
 ### Validation
@@ -36,11 +36,10 @@ python val.py
 
 	--batch-size 64
 	--task val
-		
+	
 	--save-txt
 	--save-conf
-	
-	--augment
+
 	--device cuda:0
 ```
 
@@ -61,7 +60,6 @@ python val.py
 	--save-txt
 	--save-conf
 	
-	--augment
 	--device cuda:0
 ```
 
@@ -79,16 +77,17 @@ python detect.py
 	--project <PATH_TO_PROJECT>/detect
 	--name <NAME_OF_DETECT_TASK>
 	
-	--conf-thres 0.8
+	--conf-thres <CONF_THRESH>
+	--iou-thres <IOU_THRESH>
 	
-	--augment
 	--line-thickness 2
 	--hide-labels
 	--view-img
 	--save-txt
 	--save-conf
+
 	--device cuda:0
-	
+
 
 	(--save-crop)
 ```
