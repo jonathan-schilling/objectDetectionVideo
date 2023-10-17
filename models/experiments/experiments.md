@@ -4,7 +4,7 @@ All experiments underwent training, validation, and testing procedures. The stan
 file with the corresponding name, while any deviations are documented below.
 
 
-## Experiment 1: Transfer learning + freeze
+## Experiment 1: Transfer learning
 
 ```
 --data C:/Users/Jonathan/Documents/Development/git/gitlab/projectpr/data/processed/ds_ascent_1000/ascent_1000.yaml
