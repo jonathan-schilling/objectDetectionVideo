@@ -328,7 +328,7 @@ and a user must be created. Following a new project for the labeling task can be
 interface. It is possible to reference the local images and configure the labels. As labeling is very 
 time consuming, only a distinction between attackers and defenders was made in this project. In 
 figure~\ref{fig:app:labelstudio} the labeling interface of Label Studio is depicted. As it can be seen  
-round labels were used, because with them it was easy to set a point into the middle of each 
+circular labels were used, because with them it was easy to set a point into the middle of each 
 agent. Initially it was planned to label the images of all three available maps. This turned out to be a 
 very time-consuming process, although a single label could be created very fast with the used 
 settings. Therefore only 1000 images of the map "Ascent" were labeled and it only was possible to 
@@ -351,7 +351,7 @@ parser was implemented to create an appropriate dataset. Since the used neural n
 bounding boxes it is necessary that ground truth also contains those boxes but so far only the 
 centers of the objects were labeled. 
 
-In YOLO format one file is created for every image and this file contains per object one line with the 
+In YOLO format one file is created for every image and this file contains one line per object with the 
 following information~\cite{yoloLabels}:
 
 \begin{itemize}
@@ -364,7 +364,9 @@ following information~\cite{yoloLabels}:
 
 Advantageous is that the class label as well as the $x$ and $y$ centers of the object already are 
 available and that every agent on the minimap has the same size. Therefore one default size of the 
-bounding box can be used to bring the labels into YOLO format and build the dataset.
+bounding box can be used to bring the labels into YOLO format and build the dataset. Thereby the 
+train/validation/test split already has to be specified. In this project 80~\% of the data was used for 
+training and always 10~\% for validation and testing.
 
 \subsection{Training}\label{subsec:app:training}
 
@@ -407,7 +409,7 @@ instruction~\ref{lst:app:traincmd}.
 
 Besides the number of epochs and the batch size the path to a configuration file inside the used 
 dataset has to be specified (line 10). The project path (line 11) describes the target folder where all 
-output files of the training run are saved. Additionally the image size is set to 384 pixels because of 
+output files of the training runs are saved. Additionally the image size is set to 384 pixels because of 
 the resolution of the cropped maps and the optimizer SGD is a default setting of YOLOv5. 
 Furthermore data is cached in the RAM instead of the disk what speeds up training and as device the 
 available GPU is chosen. Finally the weights of the network are saved every 10 epochs.
@@ -421,16 +423,27 @@ and is specified by \texttt{yolov5s.pt}, with \texttt{s} for small. This is a li
 low-resource devices~\cite{terven2023}. Those weights are trained for 80 classes on the Microsoft 
 COCO (Common Objects in Context) dataset~\cite{lin2014, jocher2020}. For training from scratch 
 the specification of the \texttt{weights} must be let empty and a network configuration file has to be 
-provided. 
+provided. This file defines the structure of the network as well as the weights file does.
 
 A special option for transfer learning is the \texttt{freeze} command. With that a number of 
 layers are not trained. As mentioned at the beginning of section~\ref{sec:app:impl}, it makes sense 
-to train the backbone on a large-scale image classification task such as the COCO dataset. 
+to train the backbone on a large-scale image classification task such as the COCO dataset. In order 
+to save computation costs the already pre-trained backbone weights can be frozen and only the rest 
+of the network is trained on the new data~\cite{y5TransfLearn}. Additionally after training without 
+backbone all weights can be fine tuned in a second learning task using a small learning rate. 
+Therefore instead of the downloaded weights those from the first training step are used.
 
-%TODO freeze Command lässt backbone zb weg 
-%TODO cite y5TransfLearn
+Just like the training script there is also one for validation that can be executed on the validation and 
+test data. Which data are used can be specified by the \texttt{task} option. A general version of the 
+commands are given in the appendix (see instructions~\ref{lst:aa:valcmd} and~\ref{lst:aa:testcmd}).
 
 \subsection{Inference}\label{subsec:app:inference}
+
+Last but not least there is also a script for the detection task specified in 
+instruction~\ref{lst:app:inferencecmd}. This can be applied on images as well as on videos.
+
+%TODO describe conf-thres + IoU-tresh + save-crop only recommended for images because it 
+%saves an image of all bounding boxes and their content and for videos that are realy much frames
 
 \begin{minipage}{\linewidth}
 	\vspace*{0.5cm}
@@ -458,5 +471,3 @@ to train the backbone on a large-scale image classification task such as the COC
 			(--save-crop)
 	\end{lstlisting}
 \end{minipage}
-
-\section{Summary}\label{sec:app:summary}
