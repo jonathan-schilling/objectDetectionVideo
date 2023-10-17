@@ -323,15 +323,15 @@ used.
 \subsection{Label Studio}\label{subsec:app:labelstudio}
 
 Label Studio is a web application that can be hosted by yourself. It can be installed via python and 
-the server runs locally in the simplest configuration. In a first step Label Studio has to be initialized 
-and a user must be created. Following a new project for the labeling task can be set up via the web 
-interface. It is possible to reference the local images and configure the labels. As labeling is very 
-time consuming, only a distinction between attackers and defenders was made in this project. In 
-figure~\ref{fig:app:labelstudio} the labeling interface of Label Studio is depicted. As it can be seen,  
+the server is running locally in the simplest configuration. In a first step Label Studio has to be 
+initialized and a user must be created. Following a new project for the labeling task can be set up via 
+the web interface. It is possible to reference the local images and configure the labels. As labeling is 
+very time consuming, only a distinction between attackers and defenders was made in this project. 
+In figure~\ref{fig:app:labelstudio} the labeling interface of Label Studio is depicted. As it can be seen, 
 circular labels were used, because with them it was easy to set a point into the middle of each 
 agent. Initially it was planned to label the images of all three available maps. This turned out to be a 
 very time-consuming process, although a single label could be created very fast with the used 
-settings. Therefore only 1000 images of the map "Ascent" were labeled and it only was possible to 
+settings. Therefore only 1000 images of the map "Ascent" were labeled and it was only possible to 
 train the neural network with this data. When labeling was finished the labels were exported in XML 
 format. That file contains information about the position of all objects and their assigned class for 
 each image.
@@ -347,7 +347,7 @@ each image.
 \subsection{Dataset}\label{subsec:app:dataset}
 
 After labeling, the images and labels had to be combined into a dataset that can be used by 
-YOLOv5. The learning framework YOLO comes with its own dataset format and for that reason a 
+YOLOv5. The learning framework YOLO comes with its own dataset format. For that reason a 
 parser was implemented to create an appropriate dataset. Since the used neural network creates 
 bounding boxes it is necessary that ground truth also contains those boxes but so far only the 
 centers of the objects were labeled. 
@@ -367,7 +367,7 @@ Advantageous is that the class label as well as the $x$ and $y$ centers of the o
 available and that every agent on the minimap has the same size. Therefore one default size of the 
 bounding box can be used to bring the labels into YOLO format and build the dataset. Thereby the 
 train/validation/test split already has to be specified. In this project 80~\% of the data was used for 
-training and always 10~\% for validation and testing.
+training and in each case 10~\% for validation and testing.
 
 \subsection{Training}\label{subsec:app:training}
 
@@ -411,14 +411,14 @@ available GPU is chosen. Finally the weights of the network are saved every 10 e
 			
 			--cache ram
 			--device cuda:0
-			--save-period 10
+			--save-period 5
 	\end{lstlisting}
 \end{minipage}
 
 If transfer learning is used or training starts from scratch is decided by specifying \texttt{weights} 
 for the network. In the case of instruction~\ref{lst:app:traincmd} transfer learning is applied. YOLOv5 
 is published in five scaled versions, with different width and depth of the convolutional modules. 
-They were created that YOLOv5 can be used with different hardware 
+They were created out of the reason that YOLOv5 can be used with different hardware 
 requirements~\cite{jocher2020, terven2023}. In this project the second smallest version was chosen 
 and is specified by \texttt{yolov5s.pt}, with \texttt{s} for small. This is a lightweight model for 
 low-resource devices~\cite{terven2023}. Those weights are trained for 80 classes on the Microsoft 
@@ -426,7 +426,7 @@ COCO (Common Objects in Context) dataset~\cite{lin2014, jocher2020}. For trainin
 the specification of the \texttt{weights} must be let empty and a network configuration file has to be 
 provided. This file defines the structure of the network as well as the weights file does.
 
-A special option for transfer learning is the \texttt{freeze} command. With that a number of 
+A special option for transfer learning is the \texttt{freeze} command where a number of 
 layers are not trained. As mentioned at the beginning of section~\ref{sec:app:impl}, it makes sense 
 to train the backbone on a large-scale image classification task such as the COCO dataset. In order 
 to save computation costs the already pre-trained backbone weights can be frozen and only the rest 
@@ -440,7 +440,7 @@ commands are given in the appendix (see instructions~\ref{lst:aa:valcmd} and~\re
 
 \subsection{Inference}\label{subsec:app:inference}
 
-Last but not least there is also a script for the detection task. The appropriate command is 
+Finally there is also a script for the detection task. The appropriate command is 
 specified in instruction~\ref{lst:app:inferencecmd}. This script can be applied on images as well as 
 on videos and the file can be specified with the \texttt{source} option. Further, it is possible to define 
 a confidence threshold and an \gls{acr-iou} threshold. As mentioned in section~\ref{sec:app:yolov5} 
