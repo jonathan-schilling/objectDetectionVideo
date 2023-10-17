@@ -327,7 +327,7 @@ the server runs locally in the simplest configuration. In a first step Label Stu
 and a user must be created. Following a new project for the labeling task can be set up via the web 
 interface. It is possible to reference the local images and configure the labels. As labeling is very 
 time consuming, only a distinction between attackers and defenders was made in this project. In 
-figure~\ref{fig:app:labelstudio} the labeling interface of Label Studio is depicted. As it can be seen  
+figure~\ref{fig:app:labelstudio} the labeling interface of Label Studio is depicted. As it can be seen,  
 circular labels were used, because with them it was easy to set a point into the middle of each 
 agent. Initially it was planned to label the images of all three available maps. This turned out to be a 
 very time-consuming process, although a single label could be created very fast with the used 
@@ -338,8 +338,9 @@ each image.
 
 \begin{figure}
 	\centering
-	%\includegraphics[width=0.7\linewidth]{} %TODO insert image of Label Studio
-	\caption[Interface of Label Studio.]{Labeling interface of Label Studio.}
+	\includegraphics[width=0.95\linewidth]{images/07-labelstudio}
+	\caption[Interface of Label Studio.]{Labeling interface of Label Studio with partially labeled 
+	attackers (red) and defenders (green).}
 	\label{fig:app:labelstudio}
 \end{figure}
 
@@ -383,6 +384,13 @@ After completing the installation YOLOv5 is ready for usage. A Python script sta
 available in the root folder of the repository and a general call of the script is specified in 
 instruction~\ref{lst:app:traincmd}. 
 
+Besides the number of epochs and the batch size the path to a configuration file inside the used 
+dataset has to be specified (line 10). The project path (line 11) describes the target folder where all 
+output files of the training runs are saved. Additionally the image size is set to 384 pixels because of 
+the resolution of the cropped maps and the optimizer SGD is a default setting of YOLOv5. 
+Furthermore data is cached in the RAM instead of the disk what speeds up training and as device the 
+available GPU is chosen. Finally the weights of the network are saved every 10 epochs.
+
 \renewcommand{\lstlistingname}{Instruction}
 \begin{minipage}{\linewidth}
 	\vspace*{0.5cm}
@@ -406,13 +414,6 @@ instruction~\ref{lst:app:traincmd}.
 			--save-period 10
 	\end{lstlisting}
 \end{minipage}
-
-Besides the number of epochs and the batch size the path to a configuration file inside the used 
-dataset has to be specified (line 10). The project path (line 11) describes the target folder where all 
-output files of the training runs are saved. Additionally the image size is set to 384 pixels because of 
-the resolution of the cropped maps and the optimizer SGD is a default setting of YOLOv5. 
-Furthermore data is cached in the RAM instead of the disk what speeds up training and as device the 
-available GPU is chosen. Finally the weights of the network are saved every 10 epochs.
 
 If transfer learning is used or training starts from scratch is decided by specifying \texttt{weights} 
 for the network. In the case of instruction~\ref{lst:app:traincmd} transfer learning is applied. YOLOv5 
@@ -439,14 +440,15 @@ commands are given in the appendix (see instructions~\ref{lst:aa:valcmd} and~\re
 
 \subsection{Inference}\label{subsec:app:inference}
 
-Last but not least there is also a script for the detection task specified in 
-instruction~\ref{lst:app:inferencecmd}. This can be applied on images as well as on videos.
-
-%TODO describe conf-thres + IoU-tresh + save-crop only recommended for images because it 
-%saves an image of all bounding boxes and their content and for videos that are realy much frames
+Last but not least there is also a script for the detection task. The appropriate command is 
+specified in instruction~\ref{lst:app:inferencecmd}. This script can be applied on images as well as 
+on videos and the file can be specified with the \texttt{source} option. Further, it is possible to define 
+a confidence threshold and an \gls{acr-iou} threshold. As mentioned in section~\ref{sec:app:yolov5} 
+the \gls{acr-nms} algorithm uses those thresholds to filter out irrelevant bounding boxes and thereby 
+improves detection quality. 
 
 \begin{minipage}{\linewidth}
-	\vspace*{0.5cm}
+	\vspace*{0.3cm}
 	\begin{lstlisting}[language=Bash, keywordstyle=\color{black}, 
 		caption=General command to start the detection with YOLOv5., label=lst:app:inferencecmd]
 		python detect.py
@@ -457,17 +459,19 @@ instruction~\ref{lst:app:inferencecmd}. This can be applied on images as well as
 			--project <PATH_TO_PROJECT>/detect
 			--name <NAME_OF_DETECT_TASK>
 			
-			--conf-thres 0.8
+			--conf-thres <CONF_THRESH>
+			--iou-thres <IOU_THRESH>
 			
-			--augment
-			--line-thickness 2
 			--hide-labels
-			--view-img
 			--save-txt
 			--save-conf
+						
 			--device cuda:0
-			
-			
-			(--save-crop)
 	\end{lstlisting}
 \end{minipage}
+
+The output of the detection script is a folder with one file per image containing the detected objects. 
+That file has the same structure as the files of the labels. Additionally an image or a video is 
+created by the script, showing the inferred bounding boxes. Based on the detected objects a graphic 
+can be derived that summarizes all positions of a team in one round. A script has been implemented 
+for this and an output example is shown in figure~\ref{fig:app:output}.
