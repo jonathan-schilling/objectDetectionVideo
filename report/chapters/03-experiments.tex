@@ -1,7 +1,16 @@
 \chapter{Evaluation}\label{chpt:evaluation}
 \glsresetall
 
+Two training tasks were executed for evaluation of the implemented system. The training settings as 
+well as the results are discussed in this chapter.
+
 \section{Experiments}\label{sec:eval:experiments}
+
+The first neural network was trained, using the transfer learning concept. Starting point were the 
+weights of the pre-trained \texttt{yolov5s} model. As described in section~\ref{subsec:app:training} 
+the \texttt{freeze} option was applied to deactivate adaptation for the backbone. Using the small 
+YOLOv5 model ten layer had to be frozen. The number of backbone layers can be found in the 
+network configuration file in the YOLOv5 repository.
 
 \section{Results}\label{sec:eval:results}
 
