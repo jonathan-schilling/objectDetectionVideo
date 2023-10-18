@@ -15,7 +15,7 @@ train       epoch      best     0.982       0.974       0.988       0.664
 train       epoch      last     0.975       0.982       0.988       0.675
 
 finetune    epoch      best     0.993       0.988       0.995       0.825
-finetune    epoch      best     0.994       0.988       0.995       0.823
+finetune    epoch      last     0.994       0.988       0.995       0.823
 
 
 experiment01, test data
