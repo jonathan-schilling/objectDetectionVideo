@@ -1,0 +1,62 @@
+
+experiment01, train:        568 epochs completed in 2.100 hours. 
+                                (Stopping training early as no improvement observed in last 100 epochs. Best results observed at epoch 467)
+experiment01, finetune:     100 epochs completed in 0.744 hours.
+
+experiment02, train:        600 epochs completed in 4.321 hours.
+
+
+
+                                P           R           mAP50       mAP50-95
+
+experiment01, validation data
+
+train       epoch      best     0.982       0.974       0.988       0.664
+train       epoch      last     0.975       0.982       0.988       0.675
+
+finetune    epoch      best     0.993       0.988       0.995       0.825
+finetune    epoch      best     0.994       0.988       0.995       0.823
+
+
+experiment01, test data
+
+train       epoch      best     0.974       0.977       0.991       0.661
+train       epoch      last     0.973       0.982       0.99        0.668
+
+finetune    epoch      best     0.981       0.991       0.994       0.819
+finetune    epoch      last     0.98        0.992       0.994       0.819
+
+finetune    epoch      0        0.254       0.977       0.254       0.0684
+finetune    epoch      5        0.934       0.956       0.981       0.741
+finetune    epoch      10       0.982       0.985       0.991       0.794
+finetune    epoch      15       0.983       0.983       0.992       0.807
+finetune    epoch      20       0.98        0.986       0.991       0.81
+finetune    epoch      25       0.98        0.988       0.992       0.813
+finetune    epoch      30       0.982       0.985       0.992       0.813
+finetune    epoch      35       0.982       0.986       0.993       0.815
+finetune    epoch      40       0.979       0.99        0.993       0.816
+finetune    epoch      45       0.979       0.991       0.993       0.815
+finetune    epoch      50       0.979       0.992       0.994       0.816
+finetune    epoch      55       0.981       0.991       0.994       0.811
+finetune    epoch      60       0.979       0.992       0.994       0.817
+finetune    epoch      65       0.979       0.99        0.994       0.82
+finetune    epoch      70       0.981       0.992       0.994       0.815
+finetune    epoch      75       0.98        0.992       0.994       0.815
+finetune    epoch      80       0.981       0.99        0.994       0.817
+finetune    epoch      85       0.981       0.991       0.994       0.817
+finetune    epoch      90       0.98        0.991       0.994       0.82
+finetune    epoch      95       0.981       0.991       0.994       0.82
+finetune    epoch      last     0.98        0.992       0.994       0.819
+
+
+
+experiment02, validation data
+
+train       epoch      best     0.985       0.992       0.993       0.682
+train       epoch      last     0.987       0.991       0.993       0.68
+
+
+experiment02, test data
+
+train       epoch      best     0.983       0.99        0.991       0.676
+train       epoch      last     0.984       0.986       0.991       0.673
