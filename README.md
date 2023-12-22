@@ -1,6 +1,4 @@
-# Analysis of gameplay from the video game Valorant
-
-Pattern Recognition Project at Ulm University
+# Object detection on videos using YOLOv5
 
 ## Project Structure
 
@@ -17,8 +15,6 @@ Pattern Recognition Project at Ulm University
 │── models             <- Model data for/from training/validation/testing
 │
 ├── notebooks          <- Jupyter notebooks 
-│
-├── report             <- Latex project report
 │
 ├── scripts            <- Scripts 
 │
