@@ -8,7 +8,7 @@ The scope of this project was to gain experience in the usage of an existing mac
 
 The first challenge was to prepare suitable data and label a sufficient amount of images. As second challenge several training setups were tested and network configurations for transfer learning and training from scratch were found. The dataset with most images (1000) was applied and satisfying results could be achived. Thereby the transfer learning task performed best.
 
-Next to the machine learning framework You Only Look Once (YOLO) the labeling application Label Studio [2] was used.
+Next to the machine learning framework You Only Look Once (YOLO) the labeling application Label Studio [2] was used in this project.
 
 <br><br><br>
 [1] Glenn Jocher. YOLOv5 by Ultralytics. May 2020. DOI: [10.5281/zenodo.3908559](10.5281/zenodo.3908559).<br>
