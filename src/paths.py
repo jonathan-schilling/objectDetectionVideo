@@ -7,7 +7,7 @@ by Jonathan Schilling
 from pathlib import Path
 
 # Define the base directory for data storage
-DATA_BASE_DIR = Path('C:/Users/Jonathan/Documents/Development/git/gitlab/projectpr/data')
+DATA_BASE_DIR = Path('<path_to_project>/objectDetectionVideo/data')
 
 # List of processed maps
 MAPS = ['ascent', 'haven', 'split']

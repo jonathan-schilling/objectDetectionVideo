@@ -7,8 +7,8 @@ file with the corresponding name, while any deviations are documented below.
 ## Experiment 1: Transfer learning
 
 ```
---data C:/Users/Jonathan/Documents/Development/git/gitlab/projectpr/data/processed/ds_ascent_1000/ascent_1000.yaml
---project C:/Users/Jonathan/Documents/Development/git/gitlab/projectpr/models/experiments/experiment01
+--data <path_to_project>/objectDetectionVideo/data/processed/ds_ascent_1000/ascent_1000.yaml
+--project <path_to_project>/objectDetectionVideo/models/experiments/experiment01
 ```
 
 ### Training
@@ -28,17 +28,17 @@ file with the corresponding name, while any deviations are documented below.
 --epochs 100
 --batch-size 64
 
---weights C:/Users/Jonathan/Documents/Development/git/gitlab/projectpr/models/experiments/experiment01/train/weights/best.pt
+--weights <path_to_project>/objectDetectionVideo/models/experiments/experiment01/train/weights/best.pt
 
---hyp C:/Users/Jonathan/Documents/Development/git/gitlab/projectpr/models/hyps/hyp.finetune.yaml
+--hyp <path_to_project>/objectDetectionVideo/models/hyps/hyp.finetune.yaml
 --name finetune
 ```
 
 ## Experiment 2: Training from scratch
 
 ```
---data C:/Users/Jonathan/Documents/Development/git/gitlab/projectpr/data/processed/ds_ascent_1000/ascent_1000.yaml
---project C:/Users/Jonathan/Documents/Development/git/gitlab/projectpr/models/experiments/experiment02
+--data <path_to_project>/objectDetectionVideo/data/processed/ds_ascent_1000/ascent_1000.yaml
+--project <path_to_project>/objectDetectionVideo/models/experiments/experiment02
 ```
 
 ### Training
@@ -48,5 +48,5 @@ file with the corresponding name, while any deviations are documented below.
 --batch-size 64
 
 --weights ''
---cfg C:/Users/Jonathan/Documents/Development/git/gitlab/projectpr/models/architectures/pr_yolov5s.yaml
+--cfg <path_to_project>/objectDetectionVideo/models/architectures/pr_yolov5s.yaml
 ```
