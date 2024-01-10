@@ -11,15 +11,17 @@ The first challenge was to prepare suitable data and label a sufficient amount o
 Next to the machine learning framework YOLO (You Only Look Once) the labeling application "Label Studio" [2] was used in this project.
 
 <br><br>
+<span>
 <figure>
     <img src="models/experiments/experiment01/detect/img_ascent/img_ascent_944.jpg" alt="Detected labels." style="width:400px;height:400px;">
     <figcaption><b>Figure 1:</b> Detected labels (in red: attackers, in pink: defenders).</figcaption>
 </figure>
-<br>
+<br><br>
 <figure>
     <img src="models/experiments/experiment01/detect/vid_haven/result_heatmap.png" alt="Result Heatmap Haven" style="width:400px;height:400px;">
     <figcaption><b>Figure 2:</b> Example output of a video analysis.</figcaption>
 </figure>
+</span>
 
 
 <br><br><br>
