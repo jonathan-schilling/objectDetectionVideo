@@ -1,0 +1,11 @@
+100 epochs completed in 0.744 hours.
+Optimizer stripped from C:\Users\Jonathan\Documents\Development\git\gitlab\projectpr\models\experiments\experiment01\finetune\weights\last.pt, 14.3MB
+Optimizer stripped from C:\Users\Jonathan\Documents\Development\git\gitlab\projectpr\models\experiments\experiment01\finetune\weights\best.pt, 14.3MB
+
+Validating C:\Users\Jonathan\Documents\Development\git\gitlab\projectpr\models\experiments\experiment01\finetune\weights\best.pt...
+Fusing layers...
+Model summary: 157 layers, 7015519 parameters, 0 gradients, 15.8 GFLOPs
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 1/1 [00:01<00:00,  1.57s/it]
+                   all        100        750      0.987      0.987      0.994      0.788
+              attacker        100        391      0.977      0.992      0.993      0.755
+              defender        100        359      0.997      0.982      0.995      0.822

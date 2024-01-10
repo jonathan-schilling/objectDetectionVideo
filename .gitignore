@@ -1,19 +1,9 @@
 ## OWN
 
 ### Images ###
-*.jpg
-*.jpeg
-*.jpe
-*.png
 
 # Portable Document Format
 *.pdf
-
-# Video
-.*mp4
-
-# Pytorch
-*.pt
 
 # Latex
 *.ist
@@ -21,26 +11,16 @@
 # Others
 .idea
 
-/data/interim/crops/ascent
-/data/interim/crops/haven
-/data/interim/crops/split
-/data/interim/frames/ascent
-/data/interim/frames/haven
-/data/interim/frames/split
 !/data/interim/heatmaps/assets/*
 /data/interim/labels/*.json
 !/data/interim/labels/assets/notes.json
 
-/data/processed/*/*
-!/data/processed/detect/.gitkeep
 !/data/processed/*/*.json
 !/data/processed/*/*.yaml
 
 /data/raw/*.mp4
 /data/raw/*/*
 !/data/raw/videos_raw/.gitkeep
-
-/models/experiments/*/*
 
 !/report/images/*
 

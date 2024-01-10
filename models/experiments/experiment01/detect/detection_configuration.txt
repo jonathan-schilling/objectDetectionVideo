@@ -1,0 +1,4 @@
+model: finetune, best
+
+conf_thresh: 0.7
+iou_thresh: 0.7
